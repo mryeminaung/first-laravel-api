@@ -12,7 +12,7 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $students = Students::orderBy('student_id', 'asc')->get();
+        $students = Students::orderBy('student_id', 'desc')->get();
         return response()->json($students);
     }
 
@@ -21,6 +21,15 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
+        // validate the incoming request
+        $validated = $request->validate([
+            'name' => 'required|string|min:6|max:30',
+            'email' => 'required|unique:students',
+            'age' => 'required',
+        ]);
+
+        dd($validated);
+
         $student = Students::create([
             'name' => $request->name,
             'email' => $request->email,
