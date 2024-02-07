@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentStoreRequest;
 use App\Models\Students;
 use Illuminate\Http\Request;
 
@@ -19,22 +20,9 @@ class StudentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentStoreRequest $request)
     {
-        // validate the incoming request
-        $validated = $request->validate([
-            'name' => 'required|string|min:6|max:30',
-            'email' => 'required|unique:students',
-            'age' => 'required',
-        ]);
-
-        dd($validated);
-
-        $student = Students::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'age' => $request->age
-        ]);
+        $student = Students::create($request->validated());
 
         // $student = new Students;
         // $student->name = $request->name;
