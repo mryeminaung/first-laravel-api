@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 /* ------------------------------------------------------- */
 
-Route::get("/students", [StudentsController::class, 'index']);
-Route::get("/students/{id}", [StudentsController::class, 'show']);
+// Route::get("/students", [StudentsController::class, 'index']);
+// Route::get("/students/{id}", [StudentsController::class, 'show']);
 
-Route::post("/students", [StudentsController::class, 'store']);
-Route::put("/students/{student}", [StudentsController::class, 'update']);
-Route::delete("/students/{student}", [StudentsController::class, 'destroy']);
+// Route::post("/students", [StudentsController::class, 'store']);
+// Route::put("/students/{student}", [StudentsController::class, 'update']);
+// Route::delete("/students/{student}", [StudentsController::class, 'destroy']);

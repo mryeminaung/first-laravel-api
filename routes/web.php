@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get("/", function () {
     return view('welcome');
+});
+
+Route::get('/blogs', function () {
+    return view('blogs', [
+        "blogs" => Blog::all()
+    ]);
+});
+
+Route::get('/blogs/{id}', function ($id) {
+    // $path = __DIR__ . "/../resources/ids/$blog.html";
+    // if (!file_exists($path)) {
+    //     // abort(404);
+    //     return redirect("/");
+    // }
+
+    // $blog = file_get_contents($path);
+
+    return view('blog', ["blog" => Blog::findOrFail($id)]);
 });
