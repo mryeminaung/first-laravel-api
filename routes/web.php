@@ -19,12 +19,14 @@ Route::get("/", function () {
 });
 
 Route::get('/blogs', function () {
-    return view('blogs', [
-        "blogs" => Blog::all()
+    return view('blogs.blogs', [
+        "blogs" => Blog::latest()->paginate(10)
     ]);
 });
 
-Route::get('/blogs/{blog}', function (Blog $blog) {
+Route::get('/blogs/{blog:slug}', function (Blog $blog) {
+    // find post not by id, use just slug
+
     // $path = __DIR__ . "/../resources/ids/$blog.html";
     // if (!file_exists($path)) {
     //     // abort(404);
@@ -32,8 +34,8 @@ Route::get('/blogs/{blog}', function (Blog $blog) {
     // }
 
     // $blog = file_get_contents($path);
-    if (!Blog::find($blog)) {
-        return redirect("/blogs");
-    }
-    return view('blog', ["blog" => $blog]);
+    // if (!$blog) {
+    // return redirect("/blogs");
+    // }
+    return view('blogs.blog', ["blog" => $blog]);
 });

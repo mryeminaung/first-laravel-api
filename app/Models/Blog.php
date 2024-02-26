@@ -15,5 +15,5 @@ class Blog extends Model
 
     // protected $guarded = []; every column could be filled
 
-    protected $fillable = ['title', 'intro', 'body', 'id'];
+    protected $fillable = ['title', 'intro', 'body'];
 }
