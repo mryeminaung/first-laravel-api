@@ -9,5 +9,11 @@ class Blog extends Model
 {
     use HasFactory;
     protected $tableName = 'blogs';
-    protected $fillable = ['title', 'intro', 'body'];
+
+    // every column could be filled except id column
+    // protected $guarded = ['id'];
+
+    // protected $guarded = []; every column could be filled
+
+    protected $fillable = ['title', 'intro', 'body', 'id'];
 }

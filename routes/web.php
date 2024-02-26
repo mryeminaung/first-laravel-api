@@ -24,7 +24,7 @@ Route::get('/blogs', function () {
     ]);
 });
 
-Route::get('/blogs/{id}', function ($id) {
+Route::get('/blogs/{blog}', function (Blog $blog) {
     // $path = __DIR__ . "/../resources/ids/$blog.html";
     // if (!file_exists($path)) {
     //     // abort(404);
@@ -32,6 +32,8 @@ Route::get('/blogs/{id}', function ($id) {
     // }
 
     // $blog = file_get_contents($path);
-
-    return view('blog', ["blog" => Blog::findOrFail($id)]);
+    if (!Blog::find($blog)) {
+        return redirect("/blogs");
+    }
+    return view('blog', ["blog" => $blog]);
 });
