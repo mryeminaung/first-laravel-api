@@ -4,11 +4,11 @@
     </x-slot>
     <x-slot name="content">
         {{-- {{$blogs->links()}} --}}
-        <div class="flex flex-wrap p-5 justify-center items-center gap-5 bg-white rounded-md">
+        <div class="flex flex-col p-5 px-20 justify-center items-start gap-6 bg-white rounded-md">
             @foreach($blogs as $blog)
-            <div class="p-3 rounded-md max-w-md h-auto shadow-md border bg-slate-100">
+            <div class="p-3 rounded-md h-auto w-full shadow-md border bg-slate-100 duration-100 hover:scale-105">
                 <article>
-                    <h2 class="text-3xl font-bold">{{$blog->title}}</h2>
+                    <h2 class="text-3xl font-bold">{{$blog->title}} : ID : {{$blog->id}}</h2>
 
                     {{-- <h2 class="text-xl font-bold">{!!$blog->title!!}</h2> --}}
                     {{-- {!! !!} this will not escape html syntax --}}

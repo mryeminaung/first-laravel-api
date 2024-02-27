@@ -15,5 +15,9 @@ class Blog extends Model
 
     // protected $guarded = []; every column could be filled
 
-    protected $fillable = ['title', 'intro', 'body'];
+    protected $fillable = ['title', 'slug', 'intro', 'body'];
+
+    // public $timestamps = false;
+    // this will make timestamps for model : created_at and updated_at as NULL
+
 }

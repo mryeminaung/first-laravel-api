@@ -17,10 +17,10 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->title(),
-            'slug' => fake()->title(),
-            'intro' => fake()->text(),
-            'body' => fake()->paragraph(),
+            'title' => $this->faker->sentence(),
+            'slug' => $this->faker->slug(),
+            'intro' => $this->faker->sentence(),
+            'body' => $this->faker->paragraph(),
         ];
     }
 }

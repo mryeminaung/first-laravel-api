@@ -20,12 +20,12 @@ Route::get("/", function () {
 
 Route::get('/blogs', function () {
     return view('blogs.blogs', [
-        "blogs" => Blog::latest()->paginate(10)
+        "blogs" => Blog::paginate(3)
     ]);
 });
 
+// find post not by id, use just slug
 Route::get('/blogs/{blog:slug}', function (Blog $blog) {
-    // find post not by id, use just slug
 
     // $path = __DIR__ . "/../resources/ids/$blog.html";
     // if (!file_exists($path)) {
@@ -39,3 +39,4 @@ Route::get('/blogs/{blog:slug}', function (Blog $blog) {
     // }
     return view('blogs.blog', ["blog" => $blog]);
 });
+
