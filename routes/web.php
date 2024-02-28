@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", function () {
-    return view('welcome');
-});
+// just for get method
+// Route::get('/test', [TestController::class, 'index']);
+
+// for all HTTP methods
+Route::resource('/test', TestController::class);
 
 Route::get('/blogs', function () {
     return view('blogs.blogs', [
@@ -39,4 +42,3 @@ Route::get('/blogs/{blog:slug}', function (Blog $blog) {
     // }
     return view('blogs.blog', ["blog" => $blog]);
 });
-
