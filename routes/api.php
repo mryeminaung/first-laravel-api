@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\StudentsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,12 @@ use Illuminate\Support\Facades\Route;
 
 /* ------------------------------------------------------- */
 
-// Route::get("/students", [StudentsController::class, 'index']);
-// Route::get("/students/{id}", [StudentsController::class, 'show']);
+Route::get('/posts', [PostsController::class, 'index']);
 
-// Route::post("/students", [StudentsController::class, 'store']);
-// Route::put("/students/{student}", [StudentsController::class, 'update']);
-// Route::delete("/students/{student}", [StudentsController::class, 'destroy']);
+Route::get('/posts/{post}', [PostsController::class, 'show']);
+
+Route::post('/posts', [PostsController::class, 'store']);
+
+Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update']);
+
+Route::delete('/posts/{post}', [PostsController::class, 'destroy']);

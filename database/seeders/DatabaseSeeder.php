@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Blog;
-use App\Models\Student;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,10 +17,20 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create(); 
         Blog::truncate();
-        Student::truncate();
+        Category::truncate();
 
-        Blog::factory(10)->create();
-        Student::factory(10)->create();
+        $frontend = Category::create([
+            'name' => 'frontend',
+            'slug' => 'frontend'
+        ]);
+
+        $backend = Category::create([
+            'name' => 'backend',
+            'slug' => 'backend'
+        ]);
+
+        Blog::factory(5)->create(['category_id' => $frontend]);
+        Blog::factory(5)->create(['category_id' => $backend]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
