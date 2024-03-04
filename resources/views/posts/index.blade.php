@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layout>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Route Parameters</title>
-</head>
+    <x-slot name="title">
+        <title>All Posts</title>
+    </x-slot>
 
-<body>
-    @csrf
-    <h1>Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi</h1>
-
-    <h3>{{ $text }}</h3>
-</body>
-
-</html>
+    <x-slot name="content">
+        <div class="grid grid-cols-4 gap-4">
+            @foreach ($posts as $post)
+                <div class="bg-slate-200 rounded-md p-2">
+                    <h3 class="text-xl font-bold">{{ $post->title }} {{ $post->id }}</h3>
+                    <p>{{ $post->body }}</p>
+                    <a href="posts/{{ $post->slug }}" class="rounded-md bg-slate-400 p-2 my-2 inline-flex text-center">
+                        View Detail
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </x-slot>
+</x-layout>

@@ -28,9 +28,19 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/posts', 'App\Http\Controllers\PostsController@index');
 
-
-
 // ---------------------------------------------------------------
+
+Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
+Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
+
+Route::get('/create', [PostsController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+
+Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update'])->name('posts.update');
+
+Route::delete('/posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
+
+// --------------------------------------------------------------- 
 
 Route::get('/blogs', function () {
     return view('blogs.blogs', [
@@ -54,6 +64,6 @@ Route::get('/blogs/{blog:slug}', function (Blog $blog) {
     return view('blogs.blog', ["blog" => $blog]);
 });
 
-Route::get('/categories/{category:slug}', function (Category $category) {
-    dd($category->blogs);
-});
+// Route::get('/categories/{category:slug}', function (Category $category) {
+//     dd($category->blogs);
+// });

@@ -9,5 +9,5 @@ class Post extends Model
 {
     use HasFactory;
     protected $tableName = 'posts';
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'slug', 'body'];
 }

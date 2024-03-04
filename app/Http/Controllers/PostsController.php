@@ -14,20 +14,32 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return response()->json($posts);
+        return view('posts.index', ['posts' => $posts]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PostCreateRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
+        // $validated = $request->validated();
 
-        if ($validated) {
-            Post::create($validated);
-            return response()->json(['message' => 'created successfully']);
-        }
+        // if ($validated) {
+        Post::create([
+            'title' => $request->title,
+            'slug' => str_replace(' ', '-', $request->slug),
+            'body' => $request->body
+        ]);
+        return redirect(route('posts.index'));
+        // }
     }
 
     /**
@@ -35,7 +47,15 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return response()->json($post);
+        return view('posts.detail', ['post' => $post]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
     }
 
     /**
@@ -45,10 +65,11 @@ class PostsController extends Controller
     {
         $post->update([
             'title' => $request->title,
+            'slug' => $request->slug,
             'body' => $request->body,
         ]);
 
-        return response()->json(['message' => 'updated successfully']);
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -57,7 +78,6 @@ class PostsController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-
-        return response()->json(['message' => 'deleted successfully']);
+        return redirect(route('posts.index'));
     }
 }
