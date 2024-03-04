@@ -33,13 +33,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
 Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
 
+// show creat form
 Route::get('/create', [PostsController::class, 'create'])->name('posts.create');
+
+// create post
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 
+// show edit form 
 Route::get('/posts/{post}/edit', [PostsController::class, 'edit'])->name('posts.edit');
+
+// edit post
 Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update'])->name('posts.update');
 
-Route::delete('/posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
+Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->name('posts.destroy');
 
 // --------------------------------------------------------------- 
 

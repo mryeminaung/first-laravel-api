@@ -5,6 +5,11 @@
     </x-slot>
 
     <x-slot name="content">
+        @if (session()->has('success'))
+            <h2 class="text-xl text-red-500 font-bold">
+                {{ session('success') }}
+            </h2>
+        @endif
         <div class="grid grid-cols-4 gap-4">
             @foreach ($posts as $post)
                 <div class="bg-slate-200 rounded-md p-2">

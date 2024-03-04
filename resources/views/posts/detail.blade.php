@@ -10,14 +10,16 @@
                 <h3 class="text-xl font-bold">
                     {{ $post->title }} {{ $post->id }}
                 </h3>
-                <button onclick="window.location.href = '{{ route('posts.edit', ['post' => $post]) }}';"
-                    class="rounded-md
-                    bg-slate-300 px-2 p-1">Edit</button>
-
-                <button onclick="window.location.href = {{ route('posts.destroy', ['post' => $post]) }}"
+                <button onclick="window.location.href = '{{ route('posts.edit', $post) }}';"
                     class="rounded-md bg-slate-300 px-2 p-1">
-                    Delete
+                    Edit
                 </button>
+
+                <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="rounded-md bg-slate-300 px-2 p-1">Delete</button>
+                </form>
 
             </div>
             <p>{{ $post->body }}</p>

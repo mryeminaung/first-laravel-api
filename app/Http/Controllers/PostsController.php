@@ -38,7 +38,7 @@ class PostsController extends Controller
             'slug' => str_replace(' ', '-', $request->slug),
             'body' => $request->body
         ]);
-        return redirect(route('posts.index'));
+        return redirect(route('posts.index'))->with('success', 'Product Created Succesffully');
         // }
     }
 
@@ -65,11 +65,11 @@ class PostsController extends Controller
     {
         $post->update([
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => str_replace(' ', '-', $request->slug),
             'body' => $request->body,
         ]);
 
-        return redirect(route('posts.index'));
+        return redirect(route('posts.index'))->with('success', 'Product Updated Succesffully');
     }
 
     /**
@@ -77,7 +77,8 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
+        // dd($post);
         $post->delete();
-        return redirect(route('posts.index'));
+        return redirect(route('posts.index'))->with('success', 'Product Deleted Succesffully');
     }
 }
