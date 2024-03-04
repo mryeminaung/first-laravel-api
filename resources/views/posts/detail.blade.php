@@ -6,7 +6,20 @@
 
     <x-slot name="content">
         <div>
-            <h3 class="text-xl font-bold">{{ $post->title }} {{ $post->id }}</h3>
+            <div class="flex items-center gap-x-2">
+                <h3 class="text-xl font-bold">
+                    {{ $post->title }} {{ $post->id }}
+                </h3>
+                <button onclick="window.location.href = '{{ route('posts.edit', ['post' => $post]) }}';"
+                    class="rounded-md
+                    bg-slate-300 px-2 p-1">Edit</button>
+
+                <button onclick="window.location.href = {{ route('posts.destroy', ['post' => $post]) }}"
+                    class="rounded-md bg-slate-300 px-2 p-1">
+                    Delete
+                </button>
+
+            </div>
             <p>{{ $post->body }}</p>
             <a href="/posts" class="rounded-md bg-slate-400 p-2 my-2 inline-flex text-center">Back to Home</a>
         </div>

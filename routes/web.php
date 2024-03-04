@@ -36,6 +36,7 @@ Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.
 Route::get('/create', [PostsController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 
+Route::get('/posts/{post}/edit', [PostsController::class, 'edit'])->name('posts.edit');
 Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update'])->name('posts.update');
 
 Route::delete('/posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
