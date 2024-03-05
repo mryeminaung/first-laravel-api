@@ -18,8 +18,9 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->company(),
-            'slug' => $this->faker->slug(4),
-            'body' => $this->faker->paragraph(5),
+            'slug' => $this->faker->slug(3),
+            'image_url'=> $this->faker->imageUrl(),
+            'body' => $this->faker->paragraph(10),
         ];
     }
 }
