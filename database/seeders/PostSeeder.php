@@ -15,6 +15,6 @@ class PostSeeder extends Seeder
     {
         Post::truncate();
 
-        Post::factory()->count(50)->create();
+        Post::factory()->count(20)->create();
     }
 }
