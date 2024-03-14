@@ -12,16 +12,14 @@
             </h2>
         @endif
 
-        <div class="shadow-md mt-5 border p-2 rounded-md">
-            {{ $posts->links() }}
-        </div>
+        {{ $posts->links() }}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4 gap-5 my-10">
             @foreach ($posts as $post)
                 <div class="bg-slate-200 rounded-md p-2 relative">
-                    <img src="{{ $post->image_url }}" alt="" class="w-full rounded-md">
                     <h3 class="text-xl font-bold my-2 truncate-2-lines overflow-hidden">{{ $post->title }}</h3>
-                    <p class="absolute p-1.5 -top-3 right-2 bg-red-500 text-white rounded-full px-3">{{ $post->id }}
+                    <p class="absolute p-1.5 -top-3 right-2 bg-red-500 text-white rounded-full px-3">
+                        {{-- {{ $post->category->name }} --}}
                     </p>
                     <p class="truncate-line text-ellipsis overflow-hidden">
                         {{ $post->body }}</p>

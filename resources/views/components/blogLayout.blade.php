@@ -10,8 +10,10 @@
 </head>
 
 <body class="container mx-auto bg-slate-100">
-    <x-navbar />
-    {{ $content }}
+    <main class="px-10">
+        <x-navbar />
+        {{ $content }}
+    </main>
 </body>
 
 </html>

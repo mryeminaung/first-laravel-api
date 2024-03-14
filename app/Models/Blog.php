@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
-    // protected $tableName = 'blogs';
+    protected $tableName = 'blogs';
 
     // every column could be filled except id column
     // protected $guarded = ['id'];

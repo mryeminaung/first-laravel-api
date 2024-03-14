@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\student\StudentController;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,11 @@ Route::get('/blogs/{blog:slug}', function (Blog $blog) {
     return view('blogs.blog', ["blog" => $blog]);
 });
 
-// Route::get('/categories/{category:slug}', function (Category $category) {
-//     dd($category->blogs);
-// });
+Route::get('/categories/{category:slug}', function (Category $category) {
+    return view('blogs.blogs', ['blogs' => $category->blogs]);
+});
+
+// --------------------------------------------------------------- 
+
+Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students/{student}/delete', [StudentController::class, 'destroy']);

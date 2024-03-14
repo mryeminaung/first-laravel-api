@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostCreateRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostsController extends Controller
 {
@@ -14,6 +15,9 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
+
+        Session::put('pre_url', request()->fullUrl());
+
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -31,15 +35,20 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         // $validated = $request->validated();
-
-        // if ($validated) {
-        Post::create([
-            'title' => $request->title,
-            'slug' => str_replace(' ', '-', $request->slug),
-            'body' => $request->body
+        $validateData = validator(request()->all(), [
+            'title' => 'required',
+            'slug' => 'required',
+            'body' => 'required'
         ]);
-        return redirect(route('posts.index'))->with('success', 'Product Created Succesffully');
-        // }
+
+        if ($validateData) {
+            Post::create([
+                'title' => $request->title,
+                'slug' => str_replace(' ', '-', $request->slug),
+                'body' => $request->body
+            ]);
+            return redirect(route('posts.index'))->with('success', 'Product Created Succesffully');
+        }
     }
 
     /**
@@ -69,7 +78,7 @@ class PostsController extends Controller
             'body' => $request->body,
         ]);
 
-        return redirect(route('posts.index'))->with('success', 'Product Updated Succesffully');
+        return redirect(route('posts.show', ['post' => $post]))->with('success', 'Product Updated Succesffully');
     }
 
     /**
