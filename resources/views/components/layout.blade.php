@@ -25,7 +25,7 @@
 
 <body class="m-5">
 
-    <div class=" border p-3">
+    <div class="p-3">
 
         {{-- <a href="/posts" class="rounded-md bg-slate-400 p-2 my-2 inline-flex text-center">All Posts</a>
         <a href="/create" class="rounded-md bg-slate-400 p-2 my-2 inline-flex text-center">Add Post</a> --}}

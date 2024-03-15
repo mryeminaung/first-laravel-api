@@ -78,5 +78,10 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 
 // --------------------------------------------------------------- 
 
-Route::get('/students', [StudentController::class, 'index']);
-Route::get('/students/{student}/delete', [StudentController::class, 'destroy']);
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+Route::post('/students/create', [StudentController::class, 'store'])->name('students.store');
+Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
+Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
+Route::match(['put', 'patch'], '/students/{student}/update', [StudentController::class, 'update'])->name('students.update');
+Route::get('/students/{student}/delete', [StudentController::class, 'destroy'])->name('students.destroy');

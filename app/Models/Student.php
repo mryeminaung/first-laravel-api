@@ -14,4 +14,9 @@ class Student extends Model
     {
         return $this->hasOne(StudentCard::class, 'id');
     }
+
+    public function type()
+    {
+        return $this->belongsTo(StudentType::class, 'id');
+    }
 }

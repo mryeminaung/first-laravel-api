@@ -5,7 +5,9 @@ namespace App\Http\Controllers\student;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\StudentCard;
+use App\Models\StudentType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -14,7 +16,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::paginate(10);
+        Session::put('pre_url', request()->fullUrl());
+
         return view('students.index', ['students' => $students]);
     }
 
@@ -23,7 +27,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create', ['types' => StudentType::all()]);
     }
 
     /**
@@ -31,31 +35,47 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $card = StudentCard::create(['card_number' => fake()->uuid()]);
+
+        Student::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'date_of_birth' => $request->date_of_birth,
+            'student_type_id' => $request->student_type_id,
+            'student_card_id' => $card->id,
+        ]);
+        return redirect()->route('students.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Student $student)
     {
-        //
+        return view('students.detail', ['student' => $student]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Student $student)
     {
-        //
+        return view('students.edit', ['student' => $student, 'types' => StudentType::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Student $student)
     {
-        //
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->date_of_birth = $request->date_of_birth;
+        $student->student_type_id = $request->student_type_id;
+
+        $student->save();
+
+        return back();
     }
 
     /**
@@ -65,6 +85,6 @@ class StudentController extends Controller
     {
         $student->card()->delete();
         $student->delete();
-        return back();
+        return redirect()->route('students.index');
     }
 }
