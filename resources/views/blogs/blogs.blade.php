@@ -1,31 +1,215 @@
-<x-blogLayout>
-    <x-slot name="title">
-        <title>All Blogs</title>
-    </x-slot>
-    <x-slot name="content">
-        {{-- {{$blogs->links()}} --}}
-        <div class="flex flex-col p-5 px-3 justify-center items-start gap-6 bg-white rounded-md">
-            @foreach ($blogs as $blog)
-                <div class="p-3 rounded-md h-auto w-full shadow-md border bg-slate-100 relative">
-                    <article>
-                        <h2 class="text-2xl font-bold">{{ $blog->title }}</h2>
-                        <span
-                            class="bg-slate-300 px-2 py-1 top-3 rounded-md absolute right-3">{{ $blog->category->name }}
-                        </span>
+<x-layout>
+    <!-- navbar -->
+    <x-navbar />
 
-                        {{-- <h2 class="text-xl font-bold">{!!$blog->title!!}</h2> --}}
-                        {{-- {!! !!} this will not escape html syntax --}}
-                        <h4><span class="font-bold text-xs">Published at :</span>
-                            {{ $blog->updated_at->diffForHumans() }}</h4>
-                        <p class="py-2">{{ $blog->body }}</p>
+    <!-- hero section -->
+    <x-hero />
 
-                        <a href="/blogs/{{ $blog->slug }}"
-                            class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                            Detail</a>
-
-                    </article>
-                </div>
-            @endforeach
+    <!-- blogs section -->
+    <section class="container text-center" id="blogs">
+        <h1 class="display-5 fw-bold mb-4">Blogs</h1>
+        <div class="">
+            <select name="" id="" class="p-1 rounded-pill">
+                <option value="">Filter by Category</option>
+            </select>
+            <select name="" id="" class="p-1 rounded-pill mx-3">
+                <option value="">Filter by Tag</option>
+            </select>
         </div>
-    </x-slot>
-</x-blogLayout>
+        <form action="" class="my-3">
+            <div class="input-group mb-3">
+                <input type="text" autocomplete="false" class="form-control" placeholder="Search Blogs..." />
+                <button class="input-group-text bg-primary text-light" id="basic-addon2" type="submit">
+                    Search
+                </button>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                        class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h3 class="card-title">Blog title</h3>
+                        <p class="fs-6 text-secondary">
+                            Hlaing Min Than
+                            <span> - 2days ago</span>
+                        </p>
+                        <div class="tags my-3">
+                            <span class="badge bg-primary">Html</span>
+                            <span class="badge bg-secondary">Css</span>
+                            <span class="badge bg-success">Php</span>
+                            <span class="badge bg-danger">Javascript</span>
+                            <span class="badge bg-warning text-dark">Frontend</span>
+                        </div>
+                        <p class="card-text">
+                            Some quick example text to build on the Blog title and make up
+                            the bulk of the card's content.
+                        </p>
+                        <a href="./single.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                        class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h3 class="card-title">Blog title</h3>
+                        <p class="fs-6 text-secondary">
+                            Hlaing Min Than
+                            <span> - 2days ago</span>
+                        </p>
+                        <div class="tags my-3">
+                            <span class="badge bg-primary">Html</span>
+                            <span class="badge bg-secondary">Css</span>
+                            <span class="badge bg-success">Php</span>
+                            <span class="badge bg-danger">Javascript</span>
+                            <span class="badge bg-warning text-dark">Frontend</span>
+                        </div>
+                        <p class="card-text">
+                            Some quick example text to build on the Blog title and make up
+                            the bulk of the card's content.
+                        </p>
+                        <a href="./single.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                        class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h3 class="card-title">Blog title</h3>
+                        <p class="fs-6 text-secondary">
+                            Hlaing Min Than
+                            <span> - 2days ago</span>
+                        </p>
+                        <div class="tags my-3">
+                            <span class="badge bg-primary">Html</span>
+                            <span class="badge bg-secondary">Css</span>
+                            <span class="badge bg-success">Php</span>
+                            <span class="badge bg-danger">Javascript</span>
+                            <span class="badge bg-warning text-dark">Frontend</span>
+                        </div>
+                        <p class="card-text">
+                            Some quick example text to build on the Blog title and make up
+                            the bulk of the card's content.
+                        </p>
+                        <a href="./single.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                        class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h3 class="card-title">Blog title</h3>
+                        <p class="fs-6 text-secondary">
+                            Hlaing Min Than
+                            <span> - 2days ago</span>
+                        </p>
+                        <div class="tags my-3">
+                            <span class="badge bg-primary">Html</span>
+                            <span class="badge bg-secondary">Css</span>
+                            <span class="badge bg-success">Php</span>
+                            <span class="badge bg-danger">Javascript</span>
+                            <span class="badge bg-warning text-dark">Frontend</span>
+                        </div>
+                        <p class="card-text">
+                            Some quick example text to build on the Blog title and make up
+                            the bulk of the card's content.
+                        </p>
+                        <a href="./single.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                        class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h3 class="card-title">Blog title</h3>
+                        <p class="fs-6 text-secondary">
+                            Hlaing Min Than
+                            <span> - 2days ago</span>
+                        </p>
+                        <div class="tags my-3">
+                            <span class="badge bg-primary">Html</span>
+                            <span class="badge bg-secondary">Css</span>
+                            <span class="badge bg-success">Php</span>
+                            <span class="badge bg-danger">Javascript</span>
+                            <span class="badge bg-warning text-dark">Frontend</span>
+                        </div>
+                        <p class="card-text">
+                            Some quick example text to build on the Blog title and make up
+                            the bulk of the card's content.
+                        </p>
+                        <a href="./single.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                        class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h3 class="card-title">Blog title</h3>
+                        <p class="fs-6 text-secondary">
+                            Hlaing Min Than
+                            <span> - 2days ago</span>
+                        </p>
+                        <div class="tags my-3">
+                            <span class="badge bg-primary">Html</span>
+                            <span class="badge bg-secondary">Css</span>
+                            <span class="badge bg-success">Php</span>
+                            <span class="badge bg-danger">Javascript</span>
+                            <span class="badge bg-warning text-dark">Frontend</span>
+                        </div>
+                        <p class="card-text">
+                            Some quick example text to build on the Blog title and make up
+                            the bulk of the card's content.
+                        </p>
+                        <a href="./single.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- subscribe new blogs -->
+    <section class="container my-4 text-center" id="subscribe">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h3 class="fw-bold mb-4">Subscribe For new blogs</h3>
+                <form>
+                    <div class="mb-3">
+                        <input placeholder="Email Address" type="email" class="form-control"
+                            autocomplete="false" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <div class="bg-dark text-white p-5">
+        <footer class="py-3">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link px-2">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#blogs" class="nav-link px-2">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#subscribe" class="nav-link px-2">Subscribe us</a>
+                </li>
+            </ul>
+            <p class="text-center">&copy; 2021 Blogs By creativecoder, Inc</p>
+        </footer>
+    </div>
+
+</x-layout>
