@@ -1,16 +1,20 @@
-<x-blogLayout>
-    <x-slot name="title">
-        <title>{{ strtolower(implode(' ', explode("-", $blog->slug))) }}</title>
-    </x-slot>
-
-    <x-slot name="content">
-        <div class="p-3 rounded-md shadow-sm bg-white">
-            <article>
-                <h2 class="text-3xl font-bold">{{$blog->title}}</h2>
-                <h4>Published at : {{$blog->created_at->diffForHumans()}}</h4>
-                <p>{{$blog->body}}</p>
-                <a class="bg-slate-500 text-white p-2 rounded-md block mt-3 w-max" href="/blogs">Go Back</a>
-            </article>
+<x-layout>
+    <!-- singloe blog section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
+                    class="card-img-top" alt="..." />
+                <h3 class="my-3">{{ $blog->title }}</h3>
+                <p class="lh-md">
+                    {{ $blog->body }}
+                </p>
+            </div>
         </div>
-    </x-slot>
-</x-blogLayout>
+    </div>
+
+    <x-subscribe />
+
+    <x-blogs_you_may_like_section :randomBlogs="$randomBlogs" />
+
+</x-layout>

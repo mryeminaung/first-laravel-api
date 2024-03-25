@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Student;
 use App\Models\StudentCard;
 use App\Models\StudentType;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,13 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create(); 
+        User::factory(10)->create();
         Blog::truncate();
         Category::truncate();
         // StudentCard::truncate();
         // Student::truncate();
 
-        $categories = ['frontend', 'backend', 'android'];
+        $categories = ['frontend', 'backend'];
 
         foreach ($categories as $category) {
             Category::create([
@@ -33,17 +34,17 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Blog::factory()->count(15)->create();
+        Blog::factory()->count(10)->create();
 
-        $types = ['undergraduate', 'graduate', 'high school', 'middle school', 'primary school', 'master', 'Phd', 'honor'];
+        // $types = ['undergraduate', 'graduate', 'high school', 'middle school', 'primary school', 'master', 'Phd', 'honor'];
 
-        foreach ($types as $type) {
-            StudentType::create([
-                'desc' => ucwords($type)
-            ]);
-        }
+        // foreach ($types as $type) {
+        //     StudentType::create([
+        //         'desc' => ucwords($type)
+        //     ]);
+        // }
 
-        Student::factory()->count(10)->create();
+        // Student::factory()->count(10)->create();
 
         // StudentCard::factory()->count(10)->create();
 

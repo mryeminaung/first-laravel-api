@@ -58,18 +58,10 @@ Route::get('/blogs', function () {
 
 // find post not by id, use just slug
 Route::get('/blogs/{blog:slug}', function (Blog $blog) {
-
-    // $path = __DIR__ . "/../resources/ids/$blog.html";
-    // if (!file_exists($path)) {
-    //     // abort(404);
-    //     return redirect("/");
-    // }
-
-    // $blog = file_get_contents($path);
-    // if (!$blog) {
-    // return redirect("/blogs");
-    // }
-    return view('blogs.blog', ["blog" => $blog]);
+    return view('blogs.blog', [
+        "blog" => $blog,
+        "randomBlogs" => Blog::inRandomOrder()->take(3)->get()
+    ]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
