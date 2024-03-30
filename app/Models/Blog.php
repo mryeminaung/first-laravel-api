@@ -21,6 +21,8 @@ class Blog extends Model
     // public $timestamps = false;
     // this will make timestamps for model : created_at and updated_at as NULL
 
+    
+
     // public function category()
     // {
     //     // type of relationship models

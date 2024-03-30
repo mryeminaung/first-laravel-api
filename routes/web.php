@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\collection\CollectionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
 use App\Models\Blog;
@@ -50,18 +51,26 @@ Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->nam
 
 // --------------------------------------------------------------- 
 
-Route::get('/blogs', function () {
-    return view('blogs.blogs', [
-        "blogs" => Blog::all()
-    ]);
+Route::get('/', function () {
+    return view('blogs.blogs');
 });
 
 // find post not by id, use just slug
-Route::get('/blogs/{blog:slug}', function (Blog $blog) {
-    return view('blogs.blog', [
-        "blog" => $blog,
-        "randomBlogs" => Blog::inRandomOrder()->take(3)->get()
-    ]);
+Route::get('/blogs/{slug}', function ($slug) {
+    $path = __DIR__ . "/../resources/blogs/$slug.html";
+    if (!file_exists($path)) {
+
+        // dd to debug
+        // abort 404 page
+        // redirect to specific url
+
+        // abort(404);
+        // return redirect('/');
+    }
+
+    $blog = file_get_contents($path);
+
+    return view('blogs.blog', ['blog' => $blog]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
@@ -77,3 +86,8 @@ Route::get('/students/{student}', [StudentController::class, 'show'])->name('stu
 Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
 Route::match(['put', 'patch'], '/students/{student}/update', [StudentController::class, 'update'])->name('students.update');
 Route::get('/students/{student}/delete', [StudentController::class, 'destroy'])->name('students.destroy');
+
+
+/* Collection testing */
+
+// Route::get('/', [CollectionController::class, 'index']);
