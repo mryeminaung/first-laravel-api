@@ -52,25 +52,12 @@ Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->nam
 // --------------------------------------------------------------- 
 
 Route::get('/', function () {
-    return view('blogs.blogs');
+    return view('blogs.blogs', ['blogs' => Blog::all()]);
 });
 
 // find post not by id, use just slug
 Route::get('/blogs/{slug}', function ($slug) {
-    $path = __DIR__ . "/../resources/blogs/$slug.html";
-    if (!file_exists($path)) {
-
-        // dd to debug
-        // abort 404 page
-        // redirect to specific url
-
-        // abort(404);
-        // return redirect('/');
-    }
-
-    $blog = file_get_contents($path);
-
-    return view('blogs.blog', ['blog' => $blog]);
+    return view('blogs.blog', ['blog' => Blog::find($slug)]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
