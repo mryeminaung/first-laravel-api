@@ -17,9 +17,9 @@ return new class extends Migration
             // unique method ထဲက name က custom index key ဖြစ်
             $table->string('email')->unique('my_email');
             $table->double('price');
-            $table->enum('level', ['easy', 'medium', 'hard']);
+            $table->enum('level', ['easy', 'medium', 'hard'])->nullable();
             $table->boolean('isStock')->default(true);
-            $table->date('published_at');
+            $table->date('published_at')->nullable();
             $table->timestamps();
         });
     }

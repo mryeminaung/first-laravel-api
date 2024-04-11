@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Blog;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\Student;
 use App\Models\StudentCard;
@@ -19,22 +20,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-        Blog::truncate();
-        Category::truncate();
+        Book::truncate();
+
+        Book::factory(10)->create();
+
+        // User::factory(10)->create();
+        // Blog::truncate();
+        // Category::truncate();
         // StudentCard::truncate();
         // Student::truncate();
 
-        $categories = ['frontend', 'backend'];
+        // $categories = ['frontend', 'backend'];
 
-        foreach ($categories as $category) {
-            Category::create([
-                'name' => $category,
-                'slug' => $category
-            ]);
-        }
+        // foreach ($categories as $category) {
+        //     Category::create([
+        //         'name' => $category,
+        //         'slug' => $category
+        //     ]);
+        // }
 
-        Blog::factory()->count(10)->create();
+        // Blog::factory()->count(10)->create();
 
         // $types = ['undergraduate', 'graduate', 'high school', 'middle school', 'primary school', 'master', 'Phd', 'honor'];
 

@@ -4,7 +4,9 @@ use App\Http\Controllers\collection\CollectionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
 use App\Models\Blog;
+use App\Models\Book;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,7 +76,59 @@ Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name
 Route::match(['put', 'patch'], '/students/{student}/update', [StudentController::class, 'update'])->name('students.update');
 Route::get('/students/{student}/delete', [StudentController::class, 'destroy'])->name('students.destroy');
 
-
 /* Collection testing */
 
 // Route::get('/', [CollectionController::class, 'index']);
+
+// revision on CRUD
+
+Route::get('/books', function () {
+    // Book::inRandomOrder()->take(4)->get()
+    return view('book.books', ['books' => Book::all()]);
+})->name('books.books');
+
+Route::get('/books/{book}/detail', function (Book $book) {
+    return view('book.book', ['book' => $book]);
+})->name('books.detail');
+
+Route::get('/books/{book}/delete', function (Book $book) {
+    $book->delete();
+
+    return redirect('/books');
+});
+
+Route::get('/books/add', function () {
+    return view('book.add');
+})->name('books.add');
+
+Route::post('/books/store', function (Request $request) {
+
+    $book = new Book;
+
+    $book->author = $request->author;
+    $book->email = $request->email;
+    $book->price = $request->price;
+    $book->isStock = $request->has('isStock');
+    $book->level = $request->level;
+
+    $book->save();
+
+    return redirect('/books');
+})->name('books.store');
+
+Route::get('/books/{book}/edit', function (Book $book) {
+    return view('book.edit', ['book' => $book]);
+})->name('books.edit');
+
+Route::match(['put', 'patch'], '/books/{book}/update', function (Request $request, Book $book) {
+
+    $book->author = $request->author;
+    $book->email = $request->email;
+    $book->price = $request->price;
+    $book->isStock = $request->has('isStock');
+    $book->level = $request->level;
+
+    $book->save();
+
+    return redirect('/books');
+})->name('books.update');
