@@ -68,19 +68,23 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 
 // --------------------------------------------------------------- 
 
-Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
-Route::post('/students/create', [StudentController::class, 'store'])->name('students.store');
-Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
-Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
-Route::match(['put', 'patch'], '/students/{student}/update', [StudentController::class, 'update'])->name('students.update');
-Route::get('/students/{student}/delete', [StudentController::class, 'destroy'])->name('students.destroy');
+/* to define the common controller for all of the routes within the group */
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('/students', 'index')->name('students.index');
+    Route::get('/students/create', 'create')->name('students.create');
+    Route::post('/students/create', 'store')->name('students.store');
+    Route::get('/students/{student}', 'show')->name('students.show');
+    Route::get('/students/{student}/edit', 'edit')->name('students.edit');
+    Route::match(['put', 'patch'], '/students/{student}/update', 'update')->name('students.update');
+    Route::get('/students/{student}/delete', 'destroy')->name('students.destroy');
+});
 
 /* Collection testing */
 
 // Route::get('/', [CollectionController::class, 'index']);
 
-// revision on CRUD
+/* revision on CRUD */
 
 Route::get('/books', function () {
     // Book::inRandomOrder()->take(4)->get()
@@ -132,3 +136,13 @@ Route::match(['put', 'patch'], '/books/{book}/update', function (Request $reques
 
     return redirect('/books');
 })->name('books.update');
+
+/* Revision on Routes */
+
+Route::get('/users', function () {
+    return view('collection.home');
+})->name('user.index');
+
+Route::get('/users/{id}', function (string $id) {
+    echo Request()->fullUrl();
+})->name('user.detail');
