@@ -19,7 +19,9 @@ class Book extends Model
     // ဒါပေမယ့် table create မလုပ်ခင်မှာ model ထဲမှာ false ပေးထားမှ အဆင်ပြေမယ်
     public $timestamps = false;
 
+    // create method ကို model ကနေ တိုက်ရိုက်သုံးချင်ရင် fillable or guarded တွေသတ်မှတ်ပေးထားရမယ်။ mass assignment ကနေ ကာကွယ်လို့ရအောင်လိုံ့
     protected $fillable = ['author', 'email', 'price', 'level', 'isStock', 'published_at'];
 
-    
+    // guard လုပ်ထားတဲ့ props တွေကလွဲပြီး ကျန်တာ တွေကို insert လုပ်လို့ရတယ်
+    protected $guarded = ['book_id'];
 }
