@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -28,24 +29,9 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'author' => 'required|min:5',
-            'email' => 'required|email|unique:books,email',
-            'price' => 'required|numeric',
-            'isStock' => 'required|boolean',
-            'level' => 'required|alpha',
-        ], [
-            'author.min' => 'Give at least five characters for author',
-            'email.unique' => 'duplicate entry!'
-        ]);
-
-        if ($validator->fails()) {
-            return to_route('books.add')->withErrors($validator)->withInput();
-        }
-
-        $validated = $validator->validated();
+        $validated = $request->validated();
 
         dd($validated);
 

@@ -38,7 +38,8 @@ class BookStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.unique' => 'Duplicated entry!'
+            'author.min' => 'Give at least five characters for author',
+            'email.unique' => 'duplicate entry!'
         ];
     }
 }
