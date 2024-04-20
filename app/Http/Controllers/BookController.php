@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -29,7 +30,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'author' => 'required|min:5',
             'email' => 'required|email|unique:books,email',
             'price' => 'required|numeric',
@@ -39,6 +40,14 @@ class BookController extends Controller
             'author.min' => 'Give at least five characters for author',
             'email.unique' => 'duplicate entry!'
         ]);
+
+        if ($validator->fails()) {
+            return to_route('books.add')->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        dd($validated);
 
         $book = new Book;
 
