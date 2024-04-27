@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookStoreRequest extends FormRequest
+class BookUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,24 +22,11 @@ class BookStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'author' => ['required','min:5'],
-            'email' => 'required|email|unique:books,email',
+            'author' => ['required', 'min:5'],
+            'email' => 'required|email',
             'price' => 'required|numeric',
             'isStock' => 'boolean',
             'level' => 'required|alpha',
-        ];
-    }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'author.min' => 'Give at least five characters for author',
-            'email.unique' => 'duplicate entry!'
         ];
     }
 }

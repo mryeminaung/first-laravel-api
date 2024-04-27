@@ -64,11 +64,11 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-        <select name="level" class="form-select mb-3" value="{{ old('level') }}">
+        <select name="level" class="form-select mb-3">
             <option selected disabled>Select level</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
+            <option {{ old('level') === 'easy' ?? 'selected' }} value="easy">Easy</option>
+            <option {{ old('level') === 'medium' ?? 'selected' }} value="medium">Medium</option>
+            <option {{ old('level') === 'hard' ?? 'selected' }} value="hard">Hard</option>
         </select>
         @error('level')
             <span class="text-danger">{{ $message }}</span>

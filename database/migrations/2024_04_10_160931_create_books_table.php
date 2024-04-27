@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('price');
             $table->enum('level', ['easy', 'medium', 'hard'])->nullable();
             $table->boolean('isStock')->default(true);
-            $table->date('published_at')->nullable();
+            $table->date('published_at');
             $table->timestamps();
         });
     }

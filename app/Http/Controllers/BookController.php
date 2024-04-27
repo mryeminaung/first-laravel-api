@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookUpdateRequest;
 use App\Models\Book;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,8 +35,6 @@ class BookController extends Controller
     {
         $validated = $request->validated();
 
-        dd($validated);
-
         $book = new Book;
 
         $book->author = $request->author;
@@ -42,6 +42,7 @@ class BookController extends Controller
         $book->price = $request->price;
         $book->isStock = $request->has('isStock');
         $book->level = $request->level;
+        $book->published_at = Carbon::now();
 
         $book->save();
 
@@ -67,8 +68,10 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(BookUpdateRequest $request, Book $book)
     {
+        $validated = $request->validated();
+
         $book->author = $request->author;
         $book->email = $request->email;
         $book->price = $request->price;
