@@ -16,7 +16,7 @@
             <input type="text" class="form-control @error('author')
             is-invalid
             @enderror"
-                name="author" id="author" value="{{ $book->author }}" />
+                name="author" id="author" value="{{ @old('author') ? old('author') : $book->author }}" />
             @error('author')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -26,7 +26,7 @@
             <input type="email" class="form-control @error('email')
             is-invalid
             @enderror"
-                name="email" id="email" value="{{ $book->email }}" />
+                name="email" id="email" value="{{ @old('email') ? old('email') : $book->email }}" />
             @error('email')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -36,23 +36,23 @@
             <input type="number" class="form-control @error('price')
             is-invalid
             @enderror"
-                name="price" id="price" value="{{ $book->price }}" />
+                name="price" id="price" value="{{ @old('price') ? old('price') : $book->price }}" />
             @error('price')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
         <div class="mb-3">
             <input class="form-check-input" type="checkbox" id="isStock" value="1" checked name="isStock"
-                value="{{ $book->isStock }}">
+                value="{{ @old('isStock') ? old('isStock') : $book->isStock }}">
             <label class="form-check-label" for="isStock">
                 Available in Stock
             </label>
         </div>
         <select name="level" class="form-select mb-3" value="{{ $book->level }}">
             <option disabled>Select level</option>
-            <option {{ $book->level == 'easy' ? 'selected' : '' }} value="easy">Easy</option>
-            <option {{ $book->level == 'medium' ? 'selected' : '' }} value="medium">Medium</option>
-            <option {{ $book->level == 'hard' ? 'selected' : '' }} value="hard">Hard</option>
+            <option {{ $book->level == 'easy' ?? 'selected' }} value="easy">Easy</option>
+            <option {{ $book->level == 'medium' ?? 'selected' }} value="medium">Medium</option>
+            <option {{ $book->level == 'hard' ?? 'selected' }} value="hard">Hard</option>
         </select>
         @error('level')
             <span class="text-danger">{{ $message }}</span>

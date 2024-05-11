@@ -46,7 +46,7 @@ class BookController extends Controller
 
         $book->save();
 
-        return to_route('books.detail', ['book' => $book->book_id]);
+        return to_route('books.detail', ['book' => $book->book_id])->with('success', 'Data Added Successfully');;
     }
 
     /**
@@ -80,7 +80,7 @@ class BookController extends Controller
 
         $book->save();
 
-        return redirect()->route('books.detail', ['book' => $book]);
+        return redirect()->route('books.detail', ['book' => $book])->with('success', 'Data Updated Successfully');
     }
 
     /**

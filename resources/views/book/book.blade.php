@@ -6,6 +6,12 @@
 
 @section('content')
     <div class="m-4">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>{{ session('success') }}</strong>
+            </div>
+        @endif
         <ul class="bg-secondary rounded text-white py-3">
             <li>{{ $book->author }}</li>
             <li>{{ $book->email }}</li>

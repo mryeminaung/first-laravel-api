@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('author')->comment('author\'s name');
             // unique method ထဲက name က custom index key ဖြစ်
             $table->string('email')->unique('my_email');
-            $table->double('price');
+            $table->decimal('price');
             $table->enum('level', ['easy', 'medium', 'hard'])->nullable();
             $table->boolean('isStock')->default(true);
             $table->date('published_at');

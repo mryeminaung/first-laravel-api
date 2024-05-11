@@ -6,7 +6,6 @@
             <li>{{ $book->price }}</li>
             <li>{{ $book->level }}</li>
             <a href="/books/{{ $book->book_id }}/detail" class="btn btn-primary btn-sm">See more</a>
-
         </ul>
         <hr />
     @endforeach
