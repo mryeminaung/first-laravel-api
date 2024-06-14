@@ -22,13 +22,14 @@
 @extends('blogs.home')
 
 @section('title')
-    <title>Single Blog</title>
+    <title>{{ $blog->title }}</title>
 @endsection
 
 @section('content')
     <article>
+        @dd($blog->slug)
         {{ $blog }}
-        {{-- <h1 class="text-2xl font-bold">
+        <h1 class="text-2xl font-bold">
             <a href="/blogs/{{ $blog->slug }}">{{ $blog->title }}</a>
         </h1>
         <p>{{ $blog->intro }}</p>
@@ -37,6 +38,6 @@
                 {{ $blog->body }}
             </p>
         </div>
-        <a href="/" class="bg-blue-500 p-2 rounded-md mt-3 inline-block">Back to home</a> --}}
+        <a href="/" class="bg-blue-500 p-2 rounded-md mt-3 inline-block">Back to home</a>
     </article>
 @endsection
