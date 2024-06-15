@@ -52,13 +52,13 @@ Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->nam
 
 // --------------------------------------------------------------- 
 
-Route::get('/', function () {
+Route::get('/blogs', function () {
     return view('blogs.blogs', ['blogs' => Blog::all()]);
 });
 
 // find post not by id, use just slug
-Route::get('/blogs/{slug}', function ($slug) {
-    return view('blogs.blog', ['blog' => Blog::find($slug)]);
+Route::get('/blogs/{blog}', function (Blog $blog) {
+    return view('blogs.blog', ['blog' => $blog]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {

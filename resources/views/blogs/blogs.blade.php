@@ -1,33 +1,64 @@
-{{-- <x-layout>
-    <!-- hero section -->
-    <x-hero />
+<!-- default slot -->
+{{-- </x-slot> --}}
 
-    <!-- blogs section -->
-    <x-blogs-section :blogs="$blogs" />
+<!-- hero section -->
+{{-- <x-hero /> --}}
 
-    <!-- subscribe new blogs -->
-    <x-subscribe />
+<!-- blogs section -->
+{{-- <x-blogs-section :blogs="$blogs" /> --}}
 
-</x-layout> --}}
+<!-- subscribe new blogs -->
+{{-- <x-subscribe /> --}}
 
-@extends('blogs.home')
+<x-layout>
+
+    <x-slot name="title">
+        Blogs
+    </x-slot>
+
+    @foreach ($blogs as $blog)
+        <div>
+            <h3>
+                <a class="" href="/blogs/{{ $blog->id }}">
+                    {{ $blog->title }}
+                </a>
+            </h3>
+            <div>
+                <p>
+                    published at -
+                    {{ $blog->created_at->diffForHumans() }}
+                </p>
+                <p>
+                    {{ $blog->intro }}
+                </p>
+            </div>
+        </div>
+    @endforeach
+</x-layout>
+
+{{-- @extends('blogs.home')
 
 @section('title')
     <title>All Blogs</title>
 @endsection
 
 @section('content')
-    @foreach ($blogs as $blog)
-        <article>
-            <h1 class="text-2xl font-bold">
-                <a href="/blogs/{{ $blog->slug }}">{{ $blog->title }}</a>
-            </h1>
-            <p>{{ $blog->intro }}</p>
+   @foreach ($blogs as $blog)
+        <div>
+            <h3>
+                <a class="" href="/blogs/{{ $blog->id }}">
+                    {{ $blog->title }}
+                </a>
+            </h3>
             <div>
                 <p>
-                    {{ $blog->body }}
+                    published at -
+                    {{ $blog->created_at->diffForHumans() }}
+                </p>
+                <p>
+                    {{ $blog->intro }}
                 </p>
             </div>
-        </article>
+        </div>
     @endforeach
-@endsection
+@endsection --}}

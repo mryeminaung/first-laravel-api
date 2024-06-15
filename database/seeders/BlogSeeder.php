@@ -15,17 +15,17 @@ class BlogSeeder extends Seeder
     public function run(): void
     {
         Blog::truncate();
-        Category::truncate();
+        // Category::truncate();
 
-        $categories = ['frontend', 'backend'];
+        // $categories = ['frontend', 'backend'];
 
-        foreach ($categories as $category) {
-            Category::create([
-                'name' => $category,
-                'slug' => $category
-            ]);
-        }
+        // foreach ($categories as $category) {
+        //     Category::create([
+        //         'name' => $category,
+        //         'slug' => $category
+        //     ]);
+        // }
 
-        Blog::factory()->count(10)->create();
+        Blog::factory()->count(5)->create();
     }
 }
