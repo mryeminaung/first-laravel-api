@@ -57,7 +57,7 @@ Route::get('/blogs', function () {
 });
 
 // find post not by id, use just slug
-Route::get('/blogs/{blog}', function (Blog $blog) {
+Route::get('/blogs/{blog:slug}', function (Blog $blog) {
     return view('blogs.blog', ['blog' => $blog]);
 });
 

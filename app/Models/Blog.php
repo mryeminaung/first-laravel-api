@@ -16,26 +16,26 @@ class Blog extends Model
     // every column could be filled
     protected $guarded = [];
 
-    protected $fillable = ['title', 'intro', 'body'];
+    protected $fillable = ['category_id', 'user_id', 'title', 'slug', 'intro', 'body'];
 
     // public $timestamps = false;
     // this will make timestamps for model : created_at and updated_at as NULL
 
+    public function category()
+    {
+        // type of relationship models
+        // hasOne, hasMany, belongsTo, belongsToMany
+
+        return $this->belongsTo(Category::class);
+    }
+
     // public function category()
     // {
-    //     // type of relationship models
-    //     // hasOne, hasMany, belongsTo, belongsToMany
-
     //     return $this->belongsTo(Category::class);
     // }
 
-    // public function category()
-    // {
-    //     return $this->belongsTo(Category::class);
-    // }
-
-    // public function author()
-    // {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
