@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\collection\CollectionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
-use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -51,23 +52,26 @@ Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update
 
 Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->name('posts.destroy');
 
-// --------------------------------------------------------------- 
+// Creative Coder Myanmar Blog Tutorial 
 
-Route::get('/blogs', function () {
-    return view('blogs.blogs', ['blogs' => Blog::all()]);
-});
+Route::get('/blogs', [BlogController::class, 'index']);
 
 // find post not by id, use just slug
-Route::get('/blogs/{blog:slug}', function (Blog $blog) {
-    return view('blogs.blog', ['blog' => $blog, 'randomBlogs' => Blog::inRandomOrder()->take(3)->get()]);
-});
+Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('blogs.blogs', ['blogs' => $category->blogs]);
+    return view('blogs.blogs', [
+        'blogs' => $category->blogs,
+        'categories' => Category::all(),
+        'currentCategory' => $category->name
+    ]);
 });
 
 Route::get('/user/{user:username}', function (User $user) {
-    return view('blogs.blogs', ['blogs' => $user->blogs]);
+    return view('blogs.blogs', [
+        'blogs' => $user->blogs,
+        'categories' => Category::all()
+    ]);
 });
 
 // --------------------------------------------------------------- 

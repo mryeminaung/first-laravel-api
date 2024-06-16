@@ -9,8 +9,17 @@
                     class="card-img-top" alt="..." />
                 <h3 class="my-3">{{ $blog->title }}</h3>
                 <div>
-                    <h6 class="font-bold">Author - {{ $blog->author->name }}</h6>
-                    <div class="badge bg-primary">{{ $blog->category->name }}</div>
+                    <h6 class="font-bold">
+                        Author -
+                        <a href="/user/{{ $blog->author->username }}">
+                            {{ $blog->author->name }}
+                        </a>
+                    </h6>
+                    <span class="badge bg-primary">
+                        <a class="text-white" href="/categories/{{ $blog->category->slug }}">
+                            {{ $blog->category->name }}
+                        </a>
+                    </span>
                     <div class="text-secondary">{{ $blog->created_at->diffForHumans() }}</div>
                 </div>
                 <p class="lh-md">
