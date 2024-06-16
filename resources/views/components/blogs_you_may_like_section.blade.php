@@ -1,3 +1,5 @@
+@props(['randomBlogs'])
+
 <section class="blogs_you_may_like">
     <div class="container">
         <h3 class="text-center my-4 fw-bold">Blogs You May Like</h3>
@@ -14,8 +16,9 @@
                                 <span> - {{ $blog->created_at->diffForHumans() }}</span>
                             </p>
                             <div class="tags my-3">
-                                <span class="badge bg-primary">{{ $blog->category->name }}</span>
-
+                                <a href="/categories/{{ $blog->category->slug }}">
+                                    <span class="badge bg-primary">{{ $blog->category->name }}</span>
+                                </a>
                             </div>
                             <p class="card-text">
                                 {{ $blog->body }}

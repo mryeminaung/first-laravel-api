@@ -1,5 +1,5 @@
 <x-layout>
-    
+
     <!-- hero section -->
     <x-hero />
 
@@ -8,5 +8,5 @@
 
     <!-- subscribe new blogs -->
     <x-subscribe />
-    
+
 </x-layout>

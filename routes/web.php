@@ -6,6 +6,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,11 +59,15 @@ Route::get('/blogs', function () {
 
 // find post not by id, use just slug
 Route::get('/blogs/{blog:slug}', function (Blog $blog) {
-    return view('blogs.blog', ['blog' => $blog]);
+    return view('blogs.blog', ['blog' => $blog, 'randomBlogs' => Blog::inRandomOrder()->take(3)->get()]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('blogs.blogs', ['blogs' => $category->blogs]);
+});
+
+Route::get('/user/{user:username}', function (User $user) {
+    return view('blogs.blogs', ['blogs' => $user->blogs]);
 });
 
 // --------------------------------------------------------------- 
