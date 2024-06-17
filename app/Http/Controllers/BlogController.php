@@ -14,9 +14,19 @@ class BlogController extends Controller
     public function index()
     {
         return view('blogs.blogs', [
-            'blogs' => Blog::all(),
+            'blogs' => $this->getBlogs(),
             'categories' => Category::all()
         ]);
+    }
+
+    protected function getBlogs()
+    {
+        $blogs = Blog::latest();
+        if (request('search')) {
+            $blogs = $blogs->where('title', 'LIKE', '%' . request('search') . '%')
+                ->orWhere('body', 'LIKE', '%' . request('search') . '%');
+        }
+        return $blogs->get();
     }
 
     /**

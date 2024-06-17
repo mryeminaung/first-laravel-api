@@ -21,7 +21,7 @@
                                 </a>
                             </div>
                             <p class="card-text">
-                                {{ $blog->body }}
+                                {{ $blog->intro }}
                             </p>
                             <a href="/blogs/{{ $blog->slug }}" class="btn btn-primary">Read More</a>
                         </div>

@@ -19,12 +19,12 @@ class BlogSeeder extends Seeder
         Blog::truncate();
         Category::truncate();
 
-        $categories = ['frontend post', 'backend post'];
+        $categories = ['frontend', 'backend'];
 
         foreach ($categories as $category) {
             Category::create([
                 'name' => $category,
-                'slug' => str_replace(' ', '-', $category)
+                'slug' => str_replace(' ', '-', "$category post")
             ]);
         }
 
