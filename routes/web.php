@@ -60,7 +60,7 @@ Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('blogs.blogs', [
+    return view('blogs.index', [
         'blogs' => $category->blogs,
         'categories' => Category::all(),
         'currentCategory' => $category->name
@@ -68,7 +68,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 });
 
 Route::get('/user/{user:username}', function (User $user) {
-    return view('blogs.blogs', [
+    return view('blogs.index', [
         'blogs' => $user->blogs,
         'categories' => Category::all()
     ]);
