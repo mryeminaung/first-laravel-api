@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
@@ -73,6 +74,11 @@ Route::get('/user/{user:username}', function (User $user) {
         'categories' => Category::all()
     ]);
 });
+
+// registeration and login
+
+Route::get('/register', [AuthController::class, 'create'])->name('register.create');
+Route::post('/register/store', [AuthController::class, 'store'])->name('register.store');
 
 // --------------------------------------------------------------- 
 
