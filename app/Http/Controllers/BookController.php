@@ -34,17 +34,17 @@ class BookController extends Controller
     public function store(BookStoreRequest $request)
     {
         $validated = $request->validated();
+        $book = Book::create($validated);
+        // $book = new Book;
 
-        $book = new Book;
+        // $book->author = $request->author;
+        // $book->email = $request->email;
+        // $book->price = $request->price;
+        // $book->isStock = $request->has('isStock');
+        // $book->level = $request->level;
+        // $book->published_at = Carbon::now();
 
-        $book->author = $request->author;
-        $book->email = $request->email;
-        $book->price = $request->price;
-        $book->isStock = $request->has('isStock');
-        $book->level = $request->level;
-        $book->published_at = Carbon::now();
-
-        $book->save();
+        // $book->save();
 
         return to_route('books.detail', ['book' => $book->book_id])->with('success', 'Data Added Successfully');;
     }
@@ -71,14 +71,15 @@ class BookController extends Controller
     public function update(BookUpdateRequest $request, Book $book)
     {
         $validated = $request->validated();
+        $book = $book->update($validated);
 
-        $book->author = $request->author;
-        $book->email = $request->email;
-        $book->price = $request->price;
-        $book->isStock = $request->has('isStock');
-        $book->level = $request->level;
+        // $book->author = $request->author;
+        // $book->email = $request->email;
+        // $book->price = $request->price;
+        // $book->isStock = $request->has('isStock');
+        // $book->level = $request->level;
 
-        $book->save();
+        // $book->save();
 
         return redirect()->route('books.detail', ['book' => $book])->with('success', 'Data Updated Successfully');
     }

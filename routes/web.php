@@ -75,7 +75,7 @@ Route::get('/user/{user:username}', function (User $user) {
     ]);
 });
 
-// registeration and login
+// register and login
 
 Route::get('/register', [AuthController::class, 'create'])->name('register.create');
 Route::post('/register/store', [AuthController::class, 'store'])->name('register.store');

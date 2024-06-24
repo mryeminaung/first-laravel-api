@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->enum('level', ['easy', 'medium', 'hard'])->nullable();
             $table->boolean('isStock')->default(true);
-            $table->date('published_at');
+            $table->date('published_at')->default(Carbon::now());
             $table->timestamps();
         });
     }
