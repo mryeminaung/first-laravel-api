@@ -4,7 +4,17 @@
         <div class="d-flex">
             <a href="/blogs" class="nav-link">Home</a>
             <a href="/blogs#blogs" class="nav-link">Blogs</a>
-            <a href="/register" class="nav-link">{{ auth()->user()->name ?? 'Register' }}</a>
+            @auth
+                <a href="/role-checker" class="nav-link">CheckRole</a>
+                <a href="/blogs" class="nav-link">Welcome, {{ auth()->user()->name }}</a>
+                <form action="/logout" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-link text-decoration-none">Logout</button>
+                </form>
+            @else
+                <a href="/register" class="nav-link">Register</a>
+                <a href="/login" class="nav-link">Login</a>
+            @endauth
             <a href="/blogs#subscribe" class="nav-link">Subscribe</a>
         </div>
     </div>

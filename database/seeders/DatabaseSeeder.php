@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             BlogSeeder::class,
-            BookSeeder::class,
+            // BookSeeder::class,
             // PostSeeder::class,
             // StudentSeeder::class,
             // TestDbSeeder::class

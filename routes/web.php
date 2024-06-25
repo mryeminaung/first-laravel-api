@@ -77,8 +77,34 @@ Route::get('/user/{user:username}', function (User $user) {
 
 // register and login
 
-Route::get('/register', [AuthController::class, 'create'])->name('register.create');
-Route::post('/register/store', [AuthController::class, 'store'])->name('register.store');
+Route::get('/register', [AuthController::class, 'create'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::post('/login', [AuthController::class, 'post_login'])->middleware('guest');
+
+Route::middleware('roleChecker')->group(function () {
+    Route::get('/role-checker');
+});
+
+Route::get('/panel/admin-panel', function () {
+    dd("Welcome back, Admin!");
+});
+
+Route::get('/panel/guest-panel', function () {
+    dd("Welcome back, Guest!");
+});
+
+
+// Route::get('/panel/admin-panel', function () {
+//     dd("Welcome back, Admin!");
+// })->middleware('roleChecker');
+
+// Route::get('/panel/guest-panel', function () {
+//     dd("Welcome back, Guest!");
+// })->middleware('roleChecker');
 
 // --------------------------------------------------------------- 
 
