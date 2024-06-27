@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,8 @@ class BlogSeeder extends Seeder
     public function run(): void
     {
         User::truncate();
-        Blog::truncate();
+        // Blog::truncate();
+        Comment::truncate();
         Category::truncate();
 
         $categories = ['frontend', 'backend'];
@@ -30,5 +32,6 @@ class BlogSeeder extends Seeder
 
         Blog::factory()->count(6)->create();
         User::factory()->count(3)->create();
+        Comment::factory()->count(10)->create();
     }
 }
