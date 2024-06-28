@@ -55,6 +55,10 @@ Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->nam
 
 // Creative Coder Myanmar Blog Tutorial 
 
+Route::get('/', function () {
+    return redirect('/blogs');
+});
+
 Route::get('/blogs', [BlogController::class, 'index']);
 
 // find post not by id, use just slug

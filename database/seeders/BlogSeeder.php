@@ -16,9 +16,9 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
-        User::truncate();
-        // Blog::truncate();
         Comment::truncate();
+        // User::truncate();
+        // Blog::truncate();
         Category::truncate();
 
         $categories = ['frontend', 'backend'];
@@ -32,6 +32,6 @@ class BlogSeeder extends Seeder
 
         Blog::factory()->count(6)->create();
         User::factory()->count(3)->create();
-        Comment::factory()->count(10)->create();
+        Comment::factory()->count(40)->create();
     }
 }

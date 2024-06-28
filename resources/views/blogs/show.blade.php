@@ -11,12 +11,12 @@
                 <div>
                     <h6 class="font-bold">
                         Author -
-                        <a href="/user/{{ $blog->author->username }}">
+                        <a class="text-decoration-none" href="/user/{{ $blog->author->username }}">
                             {{ $blog->author->name }}
                         </a>
                     </h6>
                     <span class="badge bg-primary">
-                        <a class="text-white" href="/categories/{{ $blog->category->slug }}">
+                        <a class="text-white text-decoration-none" href="/categories/{{ $blog->category->slug }}">
                             {{ $blog->category->name }}
                         </a>
                     </span>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <x-comments />
+    <x-comments :blog="$blog" />
 
     <x-subscribe />
 
