@@ -5,9 +5,11 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\collection\CollectionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -79,6 +81,9 @@ Route::get('/user/{user:username}', function (User $user) {
     ]);
 });
 
+// comment system
+Route::post("/blogs/{blog:slug}/comments", [CommentController::class, 'store']);
+
 // register and login
 
 Route::get('/register', [AuthController::class, 'create'])->middleware('guest');
@@ -88,6 +93,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/login', [AuthController::class, 'post_login'])->middleware('guest');
+
+// use middleware to protect routes from un-authorized request
 
 Route::middleware('roleChecker')->group(function () {
     Route::get('/role-checker');

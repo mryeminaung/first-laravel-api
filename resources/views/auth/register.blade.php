@@ -9,18 +9,14 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" value="{{ old('name') }}" name="name" class="form-control"
-                                id="name">
-                            @error('name')
-                                <span class="text-danger mt-2">{{ $message }}</span>
-                            @enderror
+                                required id="name">
+                            <x-error name="name" />
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" value="{{ old('username') }}"
-                                id="username">
-                            @error('username')
-                                <span class="text-danger mt-2">{{ $message }}</span>
-                            @enderror
+                            <input type="text" name="username" class="form-control" required
+                                value="{{ old('username') }}" id="username">
+                            <x-error name="username" />
                         </div>
                         <div class="mb-3">
                             <label for="role" class="form-label">Choose Role</label>
@@ -31,27 +27,23 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                                id="email">
-                            @error('email')
-                                <span class="text-danger mt-2">{{ $message }}</span>
-                            @enderror
+                            <input type="email" name="email" class="form-control" required
+                                value="{{ old('email') }}" id="email">
+                            <x-error name="email" />
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" />
-                            @error('password')
-                                <span class="text-danger mt-2">{{ $message }}</span>
-                            @enderror
+                            <input type="password" class="form-control" required name="password" id="password" />
+                            <x-error name="password" />
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Register
                         </button>
-                        <ul class="list-group">
+                        {{-- <ul class="list-group">
                             @foreach ($errors->all() as $error)
                                 <li class="list-group-item text-danger">{{ $error }}</li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                     </form>
                 </div>
             </div>

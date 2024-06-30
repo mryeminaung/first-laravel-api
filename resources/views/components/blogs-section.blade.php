@@ -1,9 +1,9 @@
 {{-- props are passed down by its parent components --}}
 @props(['blogs', 'categories', 'currentCategory'])
 
-<section class="container text-center" id="blogs">
-    <h1 class="display-5 fw-bold mb-4">Blogs</h1>
-    <div class="">
+<section class="container " id="blogs">
+    <h1 class="display-5 fw-bold mb-4 text-center">Blogs</h1>
+    <div class="text-center">
         <div class="dropdown">
             <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -35,7 +35,7 @@
     <div class="row">
 
         @forelse($blogs as $blog)
-            <div class="col-md-4 mb-4">
+            <div class="col col-md-6 col-lg-4 mb-4">
                 <x-blog-card :blog="$blog" />
             </div>
         @empty
