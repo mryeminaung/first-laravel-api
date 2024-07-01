@@ -3,7 +3,7 @@
 <x-card-wrapper>
     <div class="d-flex items-center">
         <div>
-            <img src="https://i.pravatar.cc/300" class="rounded-circle" width="50" height="50" alt="">
+            <img src="{{ $comment->author->avatar }}" class="rounded-circle" width="50" height="50" alt="">
         </div>
         <div class="ms-3">
             <h6>
@@ -11,7 +11,7 @@
                     {{ $comment->author->name }}
                 </a>
             </h6>
-            
+
             {{-- <p class="text-secondary">{{ $comment->created_at->diffForHumans() }}</p> --}}
 
             {{-- 

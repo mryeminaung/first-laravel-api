@@ -4,14 +4,15 @@
     <!-- single blog detail section -->
     <div class="container">
         <div class="row">
-            <div class="col-md-12 col-lg-8 mx-auto">
+            <div class="col-md-12 col-lg-8 mx-auto pt-4">
+                <a class="btn btn-primary text-decoration-none" href="{{ session('preUrl') }}">Back</a>
                 <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
                     class="card-img-top" alt="..." />
                 <h3 class="my-3">{{ $blog->title }}</h3>
                 <div class="d-flex align-items-start justify-content-start">
                     <div class="d-flex items-center">
                         <div>
-                            <img src="https://i.pravatar.cc/300" class="rounded-circle" width="50" height="50"
+                            <img src="{{ $blog->author->avatar }}" class="rounded-circle" width="50" height="50"
                                 alt="">
                         </div>
                         <div class="ms-3 d-flex align-items-start flex-column">

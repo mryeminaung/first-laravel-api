@@ -67,6 +67,8 @@ Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
 
 Route::get('/categories/{category:slug}', function (Category $category) {
+    session(['preUrl' => request()->fullUrl() . '#blogs']);
+
     return view('blogs.index', [
         'blogs' => $category->blogs,
         'categories' => Category::all(),

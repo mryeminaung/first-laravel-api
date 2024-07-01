@@ -9,7 +9,7 @@
         <div class="d-flex align-items-start justify-content-start justify-content-md-between">
             <div class="d-flex items-center">
                 <div>
-                    <img src="https://i.pravatar.cc/300" class="rounded-circle" width="50" height="50"
+                    <img src="{{ $blog->author->avatar }}" class="rounded-circle" width="50" height="50"
                         alt="">
                 </div>
                 <div class="ms-3 d-flex align-items-start flex-column">

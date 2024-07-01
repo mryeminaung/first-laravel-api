@@ -12,7 +12,7 @@
             <ul class="dropdown-menu">
                 @foreach ($categories as $category)
                     <li>
-                        <a class="dropdown-item" href="/categories/{{ $category->slug }}">
+                        <a class="dropdown-item" href="/categories/{{ $category->slug }}#blogs">
                             {{ $category->name }}
                         </a>
                     </li>

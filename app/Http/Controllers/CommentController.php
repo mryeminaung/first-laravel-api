@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,8 +11,6 @@ class CommentController extends Controller
     {
         request()->validate([
             'body' => 'required|min:10',
-            'blog_id' => 'required',
-            'user_id' => 'required'
         ]);
 
         $blog->comments()->create([
@@ -23,6 +20,5 @@ class CommentController extends Controller
         ]);
 
         return back();
-        // return redirect("/blogs/$blog->slug");
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
 {
@@ -13,6 +14,8 @@ class BlogController extends Controller
      */
     public function index()
     {
+        Session::put('preUrl', request()->fullUrl());
+
         return view('blogs.index', [
             'blogs' => Blog::latest()->filter(request(['search']))->get(),
             'categories' => Category::all()
