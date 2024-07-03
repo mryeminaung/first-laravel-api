@@ -22,6 +22,8 @@ class AuthController extends Controller
     public function store(RegisterRequest $request)
     {
         $formData = $request->validated();
+        $formData['avatar'] = "https://i.pravatar.cc/150?u=" . rand(1, 100);
+
         $user = User::create($formData);
 
         return redirect('/login');

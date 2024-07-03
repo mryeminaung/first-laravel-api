@@ -30,7 +30,8 @@
             </div>
         </div>
         <p class="card-text text-truncate">
-            {{ $blog->intro }}
+            {{-- {{ $blog->intro }} --}}
+            {{ Str::limit($blog->body, 100) }}
         </p>
         <div class="text-center"><a href="/blogs/{{ $blog->slug }}" class="btn btn-primary">Read More</a></div>
     </div>

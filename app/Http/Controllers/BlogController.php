@@ -43,6 +43,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+        // dd(Blog);
         return view('blogs.show', [
             'blog' => $blog,
             'randomBlogs' => Blog::inRandomOrder()->take(3)->get()
