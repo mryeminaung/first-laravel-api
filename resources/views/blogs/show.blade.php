@@ -48,7 +48,7 @@
         </div>
     </section>
 
-    <x-comments :blog="$blog" />
+    <x-comments :comments="$blog->comments()->latest()->paginate(3)" />
 
     <x-subscribe />
 
