@@ -8,14 +8,20 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" value="{{ old('name') }}" name="name" class="form-control"
+                            <input type="text" value="{{ old('name') }}" name="name"
+                                class="form-control @error('name')
+                                is-invalid
+                            @enderror"
                                 required id="name">
                             <x-error name="name" />
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" required
-                                value="{{ old('username') }}" id="username">
+                            <input type="text" name="username"
+                                class="form-control @error('username')
+                                is-invalid
+                            @enderror"
+                                required value="{{ old('username') }}" id="username">
                             <x-error name="username" />
                         </div>
                         <div class="mb-3">
@@ -27,13 +33,20 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" required
-                                value="{{ old('email') }}" id="email">
+                            <input type="email" name="email"
+                                class="form-control @error('email')
+                                is-invalid
+                            @enderror"
+                                required value="{{ old('email') }}" id="email">
                             <x-error name="email" />
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" required name="password" id="password" />
+                            <input type="password"
+                                class="form-control @error('password')
+                                is-invalid
+                            @enderror"
+                                required name="password" id="password" />
                             <x-error name="password" />
                         </div>
                         <button type="submit" class="btn btn-primary">
