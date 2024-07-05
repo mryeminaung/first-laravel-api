@@ -17,7 +17,7 @@ class BlogController extends Controller
         Session::put('preUrl', request()->fullUrl());
 
         return view('blogs.index', [
-            'blogs' => Blog::latest()->filter(request(['search']))->get(),
+            'blogs' => Blog::latest()->filter(request(['search']))->with('category', 'author')->get(),
             'categories' => Category::all()
         ]);
     }
@@ -45,8 +45,8 @@ class BlogController extends Controller
     {
         // dd(Blog);
         return view('blogs.show', [
-            'blog' => $blog,
-            'randomBlogs' => Blog::inRandomOrder()->take(3)->get()
+            'blog' => $blog->load('author', 'category'),
+            'randomBlogs' => Blog::inRandomOrder()->take(3)->with('author', 'category')->get()
         ]);
     }
 

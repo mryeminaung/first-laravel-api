@@ -70,7 +70,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
     session(['preUrl' => request()->fullUrl() . '#blogs']);
 
     return view('blogs.index', [
-        'blogs' => $category->blogs,
+        'blogs' => $category->blogs->load('author', 'category'),
         'categories' => Category::all(),
         'currentCategory' => $category->name
     ]);
@@ -78,7 +78,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 
 Route::get('/user/{user:username}', function (User $user) {
     return view('blogs.index', [
-        'blogs' => $user->blogs,
+        'blogs' => $user->blogs->load('author', 'category'),
         'categories' => Category::all()
     ]);
 });

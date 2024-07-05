@@ -23,7 +23,7 @@ class AuthController extends Controller
     {
         $formData = $request->validated();
         $formData['avatar'] = "https://i.pravatar.cc/150?u=" . rand(1, 100);
-
+        
         $user = User::create($formData);
 
         return redirect('/login');
