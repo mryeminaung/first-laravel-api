@@ -67,18 +67,22 @@ Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
 
 Route::get('/categories/{category:slug}', function (Category $category) {
+
     session(['preUrl' => request()->fullUrl() . '#blogs']);
 
     return view('blogs.index', [
-        'blogs' => $category->blogs->load('author', 'category'),
+        'blogs' => $category->blogs()->with('category', 'author')->paginate(6),
         'categories' => Category::all(),
         'currentCategory' => $category->name
     ]);
 });
 
 Route::get('/user/{user:username}', function (User $user) {
+
+    session(['preUrl' => request()->fullUrl() . '#blogs']);
+
     return view('blogs.index', [
-        'blogs' => $user->blogs->load('author', 'category'),
+        'blogs' => $user->blogs()->with('category', 'author')->paginate(3),
         'categories' => Category::all()
     ]);
 });

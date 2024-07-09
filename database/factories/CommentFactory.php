@@ -23,7 +23,7 @@ class CommentFactory extends Factory
             // 'user_id' => User::factory(),
             // 'blog_id' => Blog::factory(),
             'user_id' => rand(1, 3),
-            'blog_id' => rand(1, 6)
+            'blog_id' => rand(1, 18)
         ];
     }
 }

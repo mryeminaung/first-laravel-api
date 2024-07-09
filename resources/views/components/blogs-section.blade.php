@@ -33,7 +33,7 @@
         </div>
     </form>
     <div class="row">
-
+        
         @forelse($blogs as $blog)
             <div class="col col-md-6 col-lg-4 mb-4">
                 <x-blog-card :blog="$blog" />
@@ -41,6 +41,6 @@
         @empty
             <h2>No blogs are found!!!</h2>
         @endforelse
-
+        {{ $blogs->links() }}
     </div>
 </section>

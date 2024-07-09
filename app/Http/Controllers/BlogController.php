@@ -17,7 +17,7 @@ class BlogController extends Controller
         Session::put('preUrl', request()->fullUrl());
 
         return view('blogs.index', [
-            'blogs' => Blog::latest()->filter(request(['search']))->with('category', 'author')->get(),
+            'blogs' => Blog::latest()->filter(request(['search']))->with('category', 'author')->paginate(6),
             'categories' => Category::all()
         ]);
     }

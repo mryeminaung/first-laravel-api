@@ -30,7 +30,7 @@ class BlogSeeder extends Seeder
             ]);
         }
 
-        Blog::factory()->count(6)->create();
+        Blog::factory()->count(18)->create();
         User::factory()->count(3)->create();
         Comment::factory()->count(40)->create();
     }
