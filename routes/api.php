@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 /* ------------------------------------------------------- */
 
-// Route::get('/', [PostsController::class, 'test']);
-
 // Route::get('/posts', [PostsController::class, 'index']);
 
 // Route::get('/posts/{post:slug}', [PostsController::class, 'show']);

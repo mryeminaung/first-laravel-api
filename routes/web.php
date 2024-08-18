@@ -127,15 +127,7 @@ Route::get('/panel/guest-panel', function () {
 
 /* to define the common controller for all of the routes within the group */
 
-Route::controller(StudentController::class)->group(function () {
-    Route::get('/students', 'index')->name('students.index');
-    Route::get('/students/create', 'create')->name('students.create');
-    Route::post('/students/create', 'store')->name('students.store');
-    Route::get('/students/{student}', 'show')->name('students.show');
-    Route::get('/students/{student}/edit', 'edit')->name('students.edit');
-    Route::match(['put', 'patch'], '/students/{student}/update', 'update')->name('students.update');
-    Route::get('/students/{student}/delete', 'destroy')->name('students.destroy');
-});
+Route::resource("students", StudentController::class);
 
 /* Collection testing */
 
