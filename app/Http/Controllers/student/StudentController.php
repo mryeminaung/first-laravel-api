@@ -15,7 +15,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::all();
+        $students = Student::with(['card', 'type'])->get();
         Session::put('pre_url', request()->fullUrl());
 
         return view('students.index', ['students' => $students]);
@@ -38,7 +38,7 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-        return view('students.detail', ['student' => $student]);
+        return view('students.detail', ['student' => $student->load(['card', 'type'])]);
     }
 
     public function edit(Student $student)

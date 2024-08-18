@@ -21,6 +21,11 @@ class StudentStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'name' => 'required',
+            'email' => 'required|unique:students,email|email',
+            'date_of_birth' => 'required',
+            'student_type_id' => 'required',
+        ];
     }
 }
