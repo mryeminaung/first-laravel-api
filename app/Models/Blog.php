@@ -9,7 +9,7 @@ class Blog extends Model
 {
     use HasFactory;
     protected $tableName = 'blogs';
-    protected $with = ['category', 'author'];
+    // protected $with = ['category', 'author'];
 
     // every column could be filled except id column
     // protected $guarded = ['id'];
@@ -34,6 +34,21 @@ class Blog extends Model
     // {
     //     return ucwords(implode(' ', explode('-', $value)));
     // }
+
+    public function subscribe()
+    {
+        $this->subscribers()->attach(auth()->id());
+    }
+
+    public function unSubscribe()
+    {
+        $this->subscribers()->detach(auth()->id());
+    }
+
+    public function subscribers()
+    {
+        return $this->belongsToMany(User::class, 'blog_user', 'blog_id', 'user_id');
+    }
 
     public function category()
     {

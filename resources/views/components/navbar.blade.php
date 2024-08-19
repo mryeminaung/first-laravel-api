@@ -15,7 +15,6 @@
                 <a href="/register" class="nav-link">Register</a>
                 <a href="/login" class="nav-link">Login</a>
             @endauth
-            <a href="/blogs#subscribe" class="nav-link">Subscribe</a>
         </div>
     </div>
 </nav>

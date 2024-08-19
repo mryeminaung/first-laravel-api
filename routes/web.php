@@ -8,6 +8,7 @@ use App\Http\Controllers\collection\CollectionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
+use App\Http\Controllers\SubscriptionController;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
@@ -34,7 +35,13 @@ Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
 
 // comment system
-Route::post("/blogs/{blog:slug}/comments", [CommentController::class, 'store']);
+Route::post("/blogs/{blog}/comments", [CommentController::class, 'store'])->name('comments.store');
+
+// subscribe system
+Route::post('/blogs/{blog}/subscriptions', [
+    SubscriptionController::class,
+    'subscriptionHandler'
+])->name('blogs.subscriptions');
 
 Route::get('/categories/{category:slug}', function (Category $category) {
 
@@ -96,20 +103,9 @@ Route::get('/panel/guest-panel', function () {
 // --------------------------------------------------------------- 
 
 /* to define the common controller for all of the routes within the group */
-Route::resource('posts', PostsController::class);
+// Route::resource('posts', PostsController::class);
 
-Route::resource("students", StudentController::class);
+// Route::resource("students", StudentController::class);
 
 /* revision on CRUD */
-Route::resource('books', BookController::class);
-
-
-/* Collection testing */
-
-// Route::get('/', [CollectionController::class, 'index']);
-
-/* Revision on Routes */
-
-Route::get('/users', function () {
-    return view('collection.home');
-})->name('user.index');
+// Route::resource('books', BookController::class);

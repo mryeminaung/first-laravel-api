@@ -11,7 +11,22 @@
                 <a class="btn btn-primary text-decoration-none" href="{{ session('preUrl') }}">Back</a>
                 <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
                     class="card-img-top" alt="..." />
-                <h3 class="my-3">{{ $blog->title }}</h3>
+                <div class="gap-4 d-flex align-items-center justify-content-between">
+                    <h3 class="my-3">{{ $blog->title }}</h3>
+                    <form action="{{ route('blogs.subscriptions', $blog) }}" method="POST">
+                        @csrf
+                        @if (auth()->user()->isSubscribed($blog))
+                            <button class="rounded-pill btn btn-sm btn-danger">
+                                Unsubscribe
+                            </button>
+                        @else
+                            <button class="rounded-pill btn btn-sm btn-warning">
+                                Subscribe
+                            </button>
+                        @endif
+                    </form>
+                </div>
+
                 <div class="d-flex align-items-start justify-content-start">
                     <div class="items-center d-flex">
                         <div>
