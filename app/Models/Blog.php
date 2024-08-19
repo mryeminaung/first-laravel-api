@@ -9,6 +9,7 @@ class Blog extends Model
 {
     use HasFactory;
     protected $tableName = 'blogs';
+    protected $with = ['category', 'author'];
 
     // every column could be filled except id column
     // protected $guarded = ['id'];
@@ -28,6 +29,11 @@ class Blog extends Model
                 ->orWhere('body', 'LIKE', '%' . $search . '%');
         });
     }
+
+    // public function getSlugAttribute($value)
+    // {
+    //     return ucwords(implode(' ', explode('-', $value)));
+    // }
 
     public function category()
     {

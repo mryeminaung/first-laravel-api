@@ -18,7 +18,7 @@ class BlogFactory extends Factory
     {
         return [
             'category_id' => rand(1, 2),
-            'user_id' => rand(1, 3),
+            'user_id' => rand(1, 5),
             'title' => $this->faker->sentence(),
             'slug' => str_replace(' ', '-', strtolower($this->faker->sentence())),
             'intro' => $this->faker->sentence(),

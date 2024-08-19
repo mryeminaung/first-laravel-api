@@ -1,9 +1,12 @@
 <x-layout>
+    <x-slot name="title">
+        Register
+    </x-slot>
     <div class="container">
         <div class="row">
-            <div class="col-md-5 mx-auto">
-                <h2 class="text-primary text-center mt-3">Register Form</h2>
-                <div class="card p-4 my-3 shadow-sm">
+            <div class="mx-auto col-md-5">
+                <h2 class="mt-3 text-center text-primary">Register Form</h2>
+                <div class="p-4 my-3 shadow-sm card">
                     <form autocomplete="off" method="POST" action="{{ url('/register') }}">
                         @csrf
                         <div class="mb-3">

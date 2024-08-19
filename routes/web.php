@@ -24,47 +24,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/posts', [PostsController::class, 'index']);
-
-// Route::get('/posts/{post}', [PostsController::class, 'show']);
-
-// Route::post('/posts', [PostsController::class, 'store']);
-
-// Route::match(['put', 'patch'], '/posts/{id}', [PostsController::class, 'update']);
-
-// Route::delete('/posts/{post}', [PostsController::class, 'destroy']);
-
-// Route::get('/posts', 'App\Http\Controllers\PostsController@index');
-
-// ---------------------------------------------------------------
-
-Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
-Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
-
-// show creat form
-Route::get('/create', [PostsController::class, 'create'])->name('posts.create');
-
-// create post
-Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
-
-// show edit form 
-Route::get('/posts/{post}/edit', [PostsController::class, 'edit'])->name('posts.edit');
-
-// edit post
-Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update'])->name('posts.update');
-
-Route::delete('/posts/{post}/destroy', [PostsController::class, 'destroy'])->name('posts.destroy');
-
 // Creative Coder Myanmar Blog Tutorial 
-
 Route::get('/', function () {
     return redirect('/blogs');
 });
 
 Route::get('/blogs', [BlogController::class, 'index']);
 
-// find post not by id, use just slug
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
+
+// comment system
+Route::post("/blogs/{blog:slug}/comments", [CommentController::class, 'store']);
 
 Route::get('/categories/{category:slug}', function (Category $category) {
 
@@ -87,20 +57,20 @@ Route::get('/user/{user:username}', function (User $user) {
     ]);
 });
 
-// comment system
-Route::post("/blogs/{blog:slug}/comments", [CommentController::class, 'store']);
-
 // register and login
 
-Route::get('/register', [AuthController::class, 'create'])->middleware('guest');
-Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
+Route::group(['controller' => AuthController::class], function () {
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+    Route::get('/register', 'create')->middleware('guest');
+    Route::post('/register', 'store')->middleware('guest');
 
-Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
-Route::post('/login', [AuthController::class, 'post_login'])->middleware('guest');
+    Route::post('/logout', 'logout')->middleware('auth');
 
-// use middleware to protect routes from un-authorized request
+    Route::get('/login', 'login')->middleware('guest');
+    Route::post('/login', 'post_login')->middleware('guest');
+});
+
+// use middleware to protect routes from un-authorized requests
 
 Route::middleware('roleChecker')->group(function () {
     Route::get('/role-checker');
@@ -126,39 +96,20 @@ Route::get('/panel/guest-panel', function () {
 // --------------------------------------------------------------- 
 
 /* to define the common controller for all of the routes within the group */
+Route::resource('posts', PostsController::class);
 
 Route::resource("students", StudentController::class);
+
+/* revision on CRUD */
+Route::resource('books', BookController::class);
+
 
 /* Collection testing */
 
 // Route::get('/', [CollectionController::class, 'index']);
-
-/* revision on CRUD */
-
-Route::controller(BookController::class)->group(
-    function () {
-        Route::get('/books', 'index')->name('books.books');
-
-        Route::get('/books/{book}/detail', 'show')->name('books.detail');
-
-        Route::get('/books/{book}/delete', 'destroy');
-
-        Route::get('/books/add', 'create')->name('books.add');
-
-        Route::post('/books/store', 'store')->name('books.store');
-
-        Route::get('/books/{book}/edit', 'edit')->name('books.edit');
-
-        Route::match(['put', 'patch'], '/books/{book}/update', 'update')->name('books.update');
-    }
-);
 
 /* Revision on Routes */
 
 Route::get('/users', function () {
     return view('collection.home');
 })->name('user.index');
-
-Route::get('/users/{id}', function (string $id) {
-    echo Request()->fullUrl();
-})->name('user.detail');

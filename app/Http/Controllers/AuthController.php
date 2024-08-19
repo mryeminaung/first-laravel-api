@@ -23,8 +23,8 @@ class AuthController extends Controller
     {
         $formData = $request->validated();
         $formData['avatar'] = "https://i.pravatar.cc/150?u=" . rand(1, 100);
-        
-        $user = User::create($formData);
+
+        User::create($formData);
 
         return redirect('/login');
     }
@@ -44,11 +44,11 @@ class AuthController extends Controller
     {
         $formData = $request->validated();
 
-        // check email first and then check password, work BTS
+        // check email first and then check password
         if (auth()->attempt($formData)) {
             return redirect('/blogs')->with('success', 'Welcome Back');
         } else {
-            return redirect()->back()->withErrors(['email' => 'Email went wrong!', 'password' => 'Somethig went wrong!']);
+            return back()->withErrors(['email' => 'Email went wrong!', 'password' => 'Somethig went wrong!']);
         }
     }
 }

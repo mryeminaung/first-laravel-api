@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // $table->string('avatar')->default('https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png')->after('username');
-            $table->string('avatar')->unique()->after('username')->nullable();
+            $table->string('avatar')->after('username')->nullable();
         });
     }
 

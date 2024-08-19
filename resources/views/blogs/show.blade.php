@@ -1,23 +1,26 @@
 @props(['blog', 'randomBlogs'])
 
 <x-layout>
+    <x-slot name="title">
+        {{ ucwords(implode(' ', explode('-', $blog->slug))) }}
+    </x-slot>
     <!-- single blog detail section -->
     <div class="container">
         <div class="row">
-            <div class="col-md-12 col-lg-8 mx-auto pt-4">
+            <div class="pt-4 mx-auto col-md-12 col-lg-8">
                 <a class="btn btn-primary text-decoration-none" href="{{ session('preUrl') }}">Back</a>
                 <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
                     class="card-img-top" alt="..." />
                 <h3 class="my-3">{{ $blog->title }}</h3>
                 <div class="d-flex align-items-start justify-content-start">
-                    <div class="d-flex items-center">
+                    <div class="items-center d-flex">
                         <div>
                             <img src="{{ $blog->author->avatar }}" class="rounded-circle" width="50" height="50"
                                 alt="">
                         </div>
                         <div class="ms-3 d-flex align-items-start flex-column">
                             <h6>
-                                <a class="text-decoration-none text-black" href="/user/{{ $blog->author->username }}">
+                                <a class="text-black text-decoration-none" href="/user/{{ $blog->author->username }}">
                                     {{ $blog->author->name }}
                                 </a>
                             </h6>
@@ -40,7 +43,7 @@
     </div>
 
     <section class="container">
-        <div class="col-md-12 col-lg-8 mx-auto">
+        <div class="mx-auto col-md-12 col-lg-8">
             @auth
                 <x-comment-form :blog="$blog" />
             @endauth
@@ -50,7 +53,7 @@
 
     <x-comments :comments="$blog->comments()->latest()->paginate(3)" />
 
-    <x-subscribe />
+    {{-- <x-subscribe /> --}}
 
     <x-blogs_you_may_like_section :randomBlogs="$randomBlogs" />
 </x-layout>

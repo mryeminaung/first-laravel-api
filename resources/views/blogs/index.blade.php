@@ -3,7 +3,7 @@
 <x-layout>
 
     @if (session('success'))
-        <div class="alert alert-success text-center" role="alert">
+        <div class="text-center alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif
@@ -15,6 +15,6 @@
     <x-blogs-section :blogs="$blogs" :categories="$categories" :currentCategory="$currentCategory ?? null" />
 
     <!-- subscribe new blogs -->
-    <x-subscribe />
+    {{-- <x-subscribe /> --}}
 
 </x-layout>

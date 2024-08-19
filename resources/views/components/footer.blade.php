@@ -1,14 +1,14 @@
-<div class="bg-dark text-white p-5 ">
-    <footer class="py-3">
+<div class="bottom-0 text-white bg-dark">
+    <footer class="py-3 sticky-bottom">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a href="#home" class="nav-link px-2">Home</a>
+                <a href="#home" class="px-2 nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#blogs" class="nav-link px-2">Blogs</a>
+                <a href="#blogs" class="px-2 nav-link">Blogs</a>
             </li>
             <li class="nav-item">
-                <a href="#subscribe" class="nav-link px-2">Subscribe us</a>
+                <a href="#subscribe" class="px-2 nav-link">Subscribe us</a>
             </li>
         </ul>
         <p class="text-center">&copy; 2024 Blogs By creativecoder, Inc</p>
