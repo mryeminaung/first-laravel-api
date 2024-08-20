@@ -15,15 +15,17 @@
                     <h3 class="my-3">{{ $blog->title }}</h3>
                     <form action="{{ route('blogs.subscriptions', $blog) }}" method="POST">
                         @csrf
-                        @if (auth()->user()->isSubscribed($blog))
-                            <button class="rounded-pill btn btn-sm btn-danger">
-                                Unsubscribe
-                            </button>
-                        @else
-                            <button class="rounded-pill btn btn-sm btn-warning">
-                                Subscribe
-                            </button>
-                        @endif
+                        @auth
+                            @if (auth()->user()->isSubscribed($blog))
+                                <button class="rounded-pill btn btn-sm btn-danger">
+                                    Unsubscribe
+                                </button>
+                            @else
+                                <button class="rounded-pill btn btn-sm btn-warning">
+                                    Subscribe
+                                </button>
+                            @endif
+                        @endauth
                     </form>
                 </div>
 
