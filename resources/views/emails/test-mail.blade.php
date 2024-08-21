@@ -1,8 +1,7 @@
-@props(['blog', 'blogTitle'])
+@props(['comment'])
 
 <div>
-    <h3>Title : {{ $blogTitle }}</h3>
-    <p>Written By {{ $blog->author->name }}</p>
-    <h2>The best way to take care of the future is to take care of the present moment.</h2>
-    <p>Written By <b>Thich Nhat Hanh</b></p>
+    <h3>{{ $comment->body }}</h3>
+    <p>Written By Ye Min Aung</p>
+    <h4>The best way to take care of the future is to take care of the present moment.</h4>
 </div>

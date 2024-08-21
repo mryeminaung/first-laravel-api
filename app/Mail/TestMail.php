@@ -13,15 +13,13 @@ class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $blog;
-    protected $blogTitle;
+    public $comment;
     /**
      * Create a new message instance.
      */
-    public function __construct($blog)
+    public function __construct($comment)
     {
-        $this->blog = $blog;
-        $this->blogTitle = $blog->title;
+        $this->comment = $comment;
     }
 
     /**
@@ -30,7 +28,7 @@ class TestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Sending Email from Creative Ninja',
+            subject: 'Email Testing 123',
         );
     }
 
@@ -40,8 +38,7 @@ class TestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.test-mail',
-            with: ['blogTitle' => $this->blogTitle]
+            view: 'emails.test-mail',
         );
     }
 

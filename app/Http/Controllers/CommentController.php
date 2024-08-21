@@ -18,7 +18,7 @@ class CommentController extends Controller
 
         $subscribers = $blog->subscribers->filter(fn($subscriber) => $subscriber->id != auth()->id());
 
-        $blog->comments()->create([
+        $comment = $blog->comments()->create([
             'body' => request('body'),
             'blog_id' => $blog->id,
             'user_id' => auth()->user()->id
@@ -28,7 +28,7 @@ class CommentController extends Controller
         // Mail::to(auth()->user()->email)->send(new TestMail($blog));
 
         // send email by using markdown syntax view
-        Mail::to(auth()->user()->email)->send(new MarkDownMail($blog));
+        Mail::to("knightsword9128@gmail.com")->send(new TestMail($comment));
 
         return redirect("/blogs/$blog->slug");
     }
