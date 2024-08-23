@@ -28,7 +28,7 @@ class CommentController extends Controller
         // Mail::to(auth()->user()->email)->send(new TestMail($blog));
 
         // send email by using markdown syntax view
-        Mail::to("knightsword9128@gmail.com")->send(new TestMail($comment));
+        Mail::to("khantlearning@gmail.com")->send(new TestMail($comment));
 
         return redirect("/blogs/$blog->slug");
     }
