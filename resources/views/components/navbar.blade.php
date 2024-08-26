@@ -1,4 +1,4 @@
-{{-- <nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/blogs">Creative Coder</a>
         <div class="d-flex">
@@ -17,8 +17,9 @@
             @endauth
         </div>
     </div>
-</nav> --}}
+</nav>
 
+{{-- 
 <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/blogs">Creative Coder</a>
@@ -66,4 +67,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> --}}

@@ -17,7 +17,7 @@ class BookController extends Controller
     public function index()
     {
         // Book::inRandomOrder()->take(4)->get()
-        return view('book.books', ['books' => Book::all()]);
+        return view('book.index', ['books' => Book::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.add');
+        return view('book.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class BookController extends Controller
 
         // $book->save();
 
-        return to_route('books.detail', ['book' => $book->book_id])->with('success', 'Data Added Successfully');;
+        return to_route('books.show', ['book' => $book->book_id])->with('success', 'Data Added Successfully');;
     }
 
     /**
@@ -54,7 +54,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('book.book', ['book' => $book]);
+        return view('book.show', ['book' => $book]);
     }
 
     /**
@@ -71,7 +71,7 @@ class BookController extends Controller
     public function update(BookUpdateRequest $request, Book $book)
     {
         $validated = $request->validated();
-        $book = $book->update($validated);
+        $book->update($validated);
 
         // $book->author = $request->author;
         // $book->email = $request->email;
@@ -81,7 +81,7 @@ class BookController extends Controller
 
         // $book->save();
 
-        return redirect()->route('books.detail', ['book' => $book])->with('success', 'Data Updated Successfully');
+        return to_route('books.update', $book)->with('success', 'Data Updated Successfully');
     }
 
     /**
@@ -90,6 +90,6 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect('/books');
+        return to_route('books.index');
     }
 }

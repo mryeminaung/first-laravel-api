@@ -1,17 +1,16 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthSessionController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\collection\CollectionController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\student\StudentController;
-use App\Http\Controllers\SubscriptionController;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,13 +25,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Creative Coder Myanmar Blog Tutorial 
+
 Route::get('/', function () {
-    return redirect('/blogs');
+    return to_route('blog.index');
 });
 
-Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
 
-Route::get('/blogs/{blog:slug}', [BlogController::class, 'show']);
+Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
+
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
+
+Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.blogs');
+
+// Route::resource('blogs', BlogController::class);
 
 // comment system
 Route::post("/blogs/{blog}/comments", [CommentController::class, 'store'])->name('comments.store');
@@ -43,38 +49,15 @@ Route::post('/blogs/{blog}/subscriptions', [
     'subscriptionHandler'
 ])->name('blogs.subscriptions');
 
-Route::get('/categories/{category:slug}', function (Category $category) {
-
-    session(['preUrl' => request()->fullUrl() . '#blogs']);
-
-    return view('blogs.index', [
-        'blogs' => $category->blogs()->with('category', 'author')->paginate(6),
-        'categories' => Category::all(),
-        'currentCategory' => $category->name
-    ]);
+Route::controller(RegisteredUserController::class)->group(function () {
+    Route::get('/register', 'create')->middleware('guest')->name('register.create');
+    Route::post('/register', 'store')->middleware('guest')->name('register.store');
 });
 
-Route::get('/user/{user:username}', function (User $user) {
-
-    session(['preUrl' => request()->fullUrl() . '#blogs']);
-
-    return view('blogs.index', [
-        'blogs' => $user->blogs()->with('category', 'author')->paginate(3),
-        'categories' => Category::all()
-    ]);
-});
-
-// register and login
-
-Route::group(['controller' => AuthController::class], function () {
-
-    Route::get('/register', 'create')->middleware('guest');
-    Route::post('/register', 'store')->middleware('guest');
-
+Route::controller(AuthSessionController::class)->group(function () {
     Route::post('/logout', 'logout')->middleware('auth');
-
-    Route::get('/login', 'login')->middleware('guest');
-    Route::post('/login', 'post_login')->middleware('guest');
+    Route::get('/login', 'create')->middleware('guest')->name('login.create');
+    Route::post('/login', 'store')->middleware('guest')->name('login.store');
 });
 
 // use middleware to protect routes from un-authorized requests
@@ -91,15 +74,6 @@ Route::get('/panel/guest-panel', function () {
     dd("Welcome back, Guest!");
 });
 
-
-// Route::get('/panel/admin-panel', function () {
-//     dd("Welcome back, Admin!");
-// })->middleware('roleChecker');
-
-// Route::get('/panel/guest-panel', function () {
-//     dd("Welcome back, Guest!");
-// })->middleware('roleChecker');
-
 // --------------------------------------------------------------- 
 
 /* to define the common controller for all of the routes within the group */
@@ -108,4 +82,4 @@ Route::get('/panel/guest-panel', function () {
 // Route::resource("students", StudentController::class);
 
 /* revision on CRUD */
-// Route::resource('books', BookController::class);
+Route::resource('books', BookController::class);

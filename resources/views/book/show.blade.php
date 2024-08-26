@@ -12,13 +12,17 @@
                 <strong>{{ session('success') }}</strong>
             </div>
         @endif
-        <ul class="bg-secondary rounded text-white py-3">
+        <ul class="py-3 text-white rounded bg-secondary">
             <li>{{ $book->author }}</li>
             <li>{{ $book->email }}</li>
             <li>{{ $book->price }}</li>
             <li>{{ $book->level }}</li>
-            <a href="/books/{{ $book->book_id }}/delete" class="btn btn-primary btn-sm">Delete</a>
-            <a href="/books/{{ $book->book_id }}/edit" class="btn btn-primary btn-sm">Edit</a>
+            <button form="delete-book" class="btn btn-primary btn-sm">Delete</button>
+            <a href="{{ route('books.edit', $book) }}" class="btn btn-primary btn-sm">Edit</a>
         </ul>
+        <form id="delete-book" action="{{ route('books.destroy', $book) }}" method="post">
+            @csrf
+            @method('delete')
+        </form>
     </div>
 @endsection

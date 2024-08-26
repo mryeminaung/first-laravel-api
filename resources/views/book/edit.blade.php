@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <form class="rounded border border-1 w-50 my-3 mx-auto p-4 bg-white" method="POST"
-        action="{{ route('books.update', ['book' => $book]) }}">
+    <form class="p-4 mx-auto my-3 bg-white border rounded border-1 w-50" method="POST"
+        action="{{ route('books.update', $book) }}">
         @csrf
-        @method('put')
+        {{-- @method('put') --}}
         @method('patch')
 
         <div class="mb-3">
@@ -48,7 +48,7 @@
                 Available in Stock
             </label>
         </div>
-        <select name="level" class="form-select mb-3" value="{{ $book->level }}">
+        <select name="level" class="mb-3 form-select" value="{{ $book->level }}">
             <option disabled>Select level</option>
             <option {{ $book->level == 'easy' ?? 'selected' }} value="easy">Easy</option>
             <option {{ $book->level == 'medium' ?? 'selected' }} value="medium">Medium</option>
@@ -57,6 +57,6 @@
         @error('level')
             <span class="text-danger">{{ $message }}</span>
         @enderror
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button  class="btn btn-primary">Update</button>
     </form>
 @endsection
