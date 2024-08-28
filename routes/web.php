@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthSessionController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -34,11 +33,9 @@ Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
 
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
+Route::resource('blogs', BlogController::class)->except(['index', 'show']);
 
 Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.blogs');
-
-// Route::resource('blogs', BlogController::class);
 
 // comment system
 Route::post("/blogs/{blog}/comments", [CommentController::class, 'store'])->name('comments.store');

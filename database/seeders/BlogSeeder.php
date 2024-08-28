@@ -16,10 +16,10 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
-        Comment::truncate();
+        // Comment::truncate();
         // User::truncate();
         // Blog::truncate();
-        Category::truncate();
+        // Category::truncate();
 
         $categories = ['frontend', 'backend'];
 

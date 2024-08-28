@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogStoreRequest;
+use App\Http\Requests\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -14,10 +16,13 @@ class BlogController extends Controller
      */
     public function index()
     {
+        // dd(request(['search', 'category']));
+
         Session::put('preUrl', request()->fullUrl());
 
+        // Blog::latest() query will be injected into the scope filter method
         return view('blogs.index', [
-            'blogs' => Blog::latest()->filter(request(['search']))->with('category', 'author')->paginate(6),
+            'blogs' => Blog::latest()->filter(request(['search', 'category']))->with('category', 'author')->paginate(6),
             'categories' => Category::all()
         ]);
     }
@@ -33,7 +38,7 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogStoreRequest $request)
     {
         //
     }
@@ -55,15 +60,15 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('blogs.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(BlogUpdateRequest $request, Blog $blog)
     {
-        //
+        $request->validate();
     }
 
     /**
@@ -71,6 +76,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return route('blog.index');
     }
 }

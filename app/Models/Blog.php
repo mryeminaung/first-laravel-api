@@ -24,16 +24,24 @@ class Blog extends Model
 
     public function scopeFilter($query, $filter)
     {
-        $query->when($filter['search'] ?? null, function ($query, $search) {
+        // here $query is the query that's Blog::latest();
+        $query->when($filter['slug'] ?? null, function ($query, $search) {
             $query->where('title', 'LIKE', '%' . $search . '%')
                 ->orWhere('body', 'LIKE', '%' . $search . '%');
         });
+
+        $query->when($filter['category'] ?? null, function ($query, $slug) {
+            $query->whereHas('category', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            });
+            // $query->join('categories', 'blogs.category_id', '=', 'categories.id');
+        });
     }
 
-    // public function getSlugAttribute($value)
-    // {
-    //     return ucwords(implode(' ', explode('-', $value)));
-    // }
+    public function setSlugAttribute($value)
+    {
+        return strtolower(implode(' ', explode('-', $value)));
+    }
 
     public function subscribe()
     {
