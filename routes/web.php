@@ -29,11 +29,15 @@ Route::get('/', function () {
     return to_route('blog.index');
 });
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 
-Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
+// Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+Route::resource('blogs', BlogController::class);
 
-Route::resource('blogs', BlogController::class)->except(['index', 'show']);
+Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blogs.show');
+
+// Route::resource('blogs', BlogController::class)->except(['index', 'show']);
+
 
 Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.blogs');
 
@@ -79,4 +83,4 @@ Route::get('/panel/guest-panel', function () {
 // Route::resource("students", StudentController::class);
 
 /* revision on CRUD */
-Route::resource('books', BookController::class);
+// Route::resource('books', BookController::class);

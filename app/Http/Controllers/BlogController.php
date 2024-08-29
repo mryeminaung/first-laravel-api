@@ -32,7 +32,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('blogs.create', ['categories' => Category::all()]);
     }
 
     /**
@@ -40,7 +40,16 @@ class BlogController extends Controller
      */
     public function store(BlogStoreRequest $request)
     {
-        //
+        dd($request()->all());
+
+        $attributes = $request->validate();
+        $attributes['user_id'] = auth()->user()->id;
+
+        dd($attributes);
+
+        Blog::create($attributes);
+
+        return to_route('blogs.index');
     }
 
     /**
@@ -48,7 +57,6 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        // dd(Blog);
         return view('blogs.show', [
             'blog' => $blog->load('author', 'category'),
             'randomBlogs' => Blog::inRandomOrder()->take(3)->with('author', 'category')->get()
@@ -60,7 +68,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('blogs.edit');
+        return view('blogs.edit', ['blog' => $blog]);
     }
 
     /**
@@ -68,7 +76,11 @@ class BlogController extends Controller
      */
     public function update(BlogUpdateRequest $request, Blog $blog)
     {
-        $request->validate();
+        $attributes = $request->validate();
+
+        $blog->update($attributes);
+
+        return to_route('blogs.index');
     }
 
     /**
@@ -77,6 +89,6 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         $blog->delete();
-        return route('blog.index');
+        return to_route('blogs.index');
     }
 }

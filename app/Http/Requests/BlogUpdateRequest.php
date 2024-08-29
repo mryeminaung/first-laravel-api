@@ -11,7 +11,7 @@ class BlogUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,23 +21,12 @@ class BlogUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        /**
-         * 
-         *  $table->id();
-            $table->foreignId('category_id');
-            $table->foreignId('user_id');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('intro');
-            $table->text('body');
-            $table->timestamps();
-         * 
-         */
         return [
-            'title' => 'required|min:10|max:255',
-            'intro' => 'required',
-            'body' => 'required',
-            'category_id' => 'required|exists:categories,id'
+            'title' => 'required|min:10',
+            'slug' => 'required|unique:blogs,slug',
+            'intro' => 'required|min:10',
+            'body'  => 'required|min:10',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

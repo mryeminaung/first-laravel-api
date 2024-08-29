@@ -1,6 +1,7 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/blogs">Creative Coder</a>
+        <a href="/blogs/create" class="btn btn-link">Create Blog</a>
         <div class="d-flex">
             <a href="/blogs" class="nav-link">Home</a>
             <a href="/blogs#blogs" class="nav-link">Blogs</a>
