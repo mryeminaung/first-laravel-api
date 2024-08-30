@@ -40,7 +40,7 @@ class Blog extends Model
 
     public function setSlugAttribute($value)
     {
-        return strtolower(implode(' ', explode('-', $value)));
+        $this->attributes['slug'] = strtolower(implode('-', explode(' ', $value)));
     }
 
     public function subscribe()

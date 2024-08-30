@@ -4,7 +4,7 @@
     </x-slot>
     <div class="container">
         <div class="row">
-            <div class="mx-auto col-md-5">
+            <div class="mx-auto col-md-8 col-lg-5">
                 <h2 class="mt-3 text-center text-primary">Login Form</h2>
                 <div class="p-4 my-3 shadow-sm card">
                     <form autocomplete="off" method="POST" action="{{ url('/login') }}">

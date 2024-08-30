@@ -21,9 +21,11 @@
                                     Unsubscribe
                                 </button>
                             @else
-                                <button class="rounded-pill btn btn-sm btn-warning">
-                                    Subscribe
-                                </button>
+                                @unless (auth()->user()->id == $blog->author->id)
+                                    <button class="rounded-pill btn btn-sm btn-warning">
+                                        Subscribe
+                                    </button>
+                                @endunless
                             @endif
                         @endauth
                     </form>
@@ -47,7 +49,7 @@
                         </div>
                     </div>
                     <div class="tags ms-3">
-                        <a class="text-decoration-none" href="/categories/{{ $blog->category->slug }}">
+                        <a class="text-decoration-none" href="/?categories/{{ $blog->category->slug }}">
                             <span class="badge bg-primary">{{ $blog->category->name }}</span>
                         </a>
                     </div>

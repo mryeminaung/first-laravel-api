@@ -40,12 +40,8 @@ class BlogController extends Controller
      */
     public function store(BlogStoreRequest $request)
     {
-        dd($request()->all());
-
-        $attributes = $request->validate();
+        $attributes = $request->validated();
         $attributes['user_id'] = auth()->user()->id;
-
-        dd($attributes);
 
         Blog::create($attributes);
 

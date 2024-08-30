@@ -1,13 +1,16 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/blogs">Creative Coder</a>
-        <a href="/blogs/create" class="btn btn-link">Create Blog</a>
+
         <div class="d-flex">
             <a href="/blogs" class="nav-link">Home</a>
             <a href="/blogs#blogs" class="nav-link">Blogs</a>
             @auth
                 <a href="/role-checker" class="nav-link">CheckRole</a>
                 <a href="/blogs" class="nav-link">Welcome, {{ auth()->user()->name }}</a>
+                @if (auth()->user()->isAdmin())
+                    <a href="/admin/blogs/create" class="nav-link">Create Blog</a>
+                @endif
                 <form action="/logout" method="post">
                     @csrf
                     <button type="submit" class="btn btn-link text-decoration-none">Logout</button>

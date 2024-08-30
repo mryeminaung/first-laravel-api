@@ -8,6 +8,12 @@
         </div>
     @endif
 
+    @if (session('message'))
+        <div class="text-center alert alert-danger" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <!-- hero section -->
     <x-hero />
 

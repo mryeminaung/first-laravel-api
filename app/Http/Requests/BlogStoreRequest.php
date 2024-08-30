@@ -22,10 +22,10 @@ class BlogStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:10',
+            'title' => 'required',
             'slug' => 'required|unique:blogs,slug',
-            'intro' => 'required|min:10',
-            'body'  => 'required|min:10',
+            'intro' => 'required',
+            'body'  => 'required',
             'category_id' => 'required|exists:categories,id',
         ];
     }

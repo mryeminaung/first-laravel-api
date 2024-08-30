@@ -1,4 +1,4 @@
-<div class="bottom-0 text-white bg-dark">
+<div class="text-white sticky-bottom bg-dark">
     <footer class="py-3 sticky-bottom">
         <ul class="nav justify-content-center">
             <li class="nav-item">

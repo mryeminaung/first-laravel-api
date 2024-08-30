@@ -26,18 +26,12 @@ use Illuminate\Support\Facades\Route;
 // Creative Coder Myanmar Blog Tutorial 
 
 Route::get('/', function () {
-    return to_route('blog.index');
+    return to_route('blogs.index');
 });
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-
-// Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-Route::resource('blogs', BlogController::class);
+Route::resource('blogs', BlogController::class)->except(['show', 'create', 'store']);
 
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blogs.show');
-
-// Route::resource('blogs', BlogController::class)->except(['index', 'show']);
-
 
 Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.blogs');
 
@@ -49,6 +43,11 @@ Route::post('/blogs/{blog}/subscriptions', [
     SubscriptionController::class,
     'subscriptionHandler'
 ])->name('blogs.subscriptions');
+
+Route::group(['controller' => BlogController::class, 'middleware' => 'admin'], function () {
+    Route::get('/admin/blogs/create', 'create')->name('blogs.create');
+    Route::post('/admin/blogs/store', 'store')->name('blogs.store');
+});
 
 Route::controller(RegisteredUserController::class)->group(function () {
     Route::get('/register', 'create')->middleware('guest')->name('register.create');

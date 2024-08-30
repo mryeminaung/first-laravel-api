@@ -2,24 +2,24 @@
 
 <section class="blogs_you_may_like ">
     <div class="container">
-        <h3 class="text-center my-4 fw-bold">Blogs You May Like</h3>
+        <h3 class="my-4 text-center fw-bold">Blogs You May Like</h3>
         <div class="row ">
             @foreach ($randomBlogs as $blog)
-                <div class="col col-md-6 col-lg-4 mb-4">
-                    <div class="card shadow border">
+                <div class="mb-4 col col-md-6 col-lg-4">
+                    <div class="border shadow card">
                         <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
                             class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h3 class="card-title text-truncate">{{ $blog->title }}</h3>
                             <div class="d-flex align-items-start justify-content-between">
-                                <div class="d-flex items-center">
+                                <div class="items-center d-flex">
                                     <div>
                                         <img src="{{ $blog->author->avatar }}" class="rounded-circle" width="50"
                                             height="50" alt="">
                                     </div>
                                     <div class="ms-3 d-flex align-items-start flex-column">
                                         <h6>
-                                            <a class="text-decoration-none text-black"
+                                            <a class="text-black text-decoration-none"
                                                 href="/user/{{ $blog->author->username }}">
                                                 {{ $blog->author->name }}
                                             </a>
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class="tags">
-                                    <a class="text-decoration-none" href="/categories/{{ $blog->category->slug }}">
+                                    <a class="text-decoration-none" href="/blogs/?categories={{ $blog->category->slug }}">
                                         <span class="badge bg-primary">{{ $blog->category->name }}</span>
                                     </a>
                                 </div>

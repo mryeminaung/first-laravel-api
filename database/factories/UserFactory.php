@@ -29,7 +29,8 @@ class UserFactory extends Factory
             'avatar' => "https://i.pravatar.cc/150?u=" . rand(1, 100),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'),
+            // static::$password ??= 
             'remember_token' => Str::random(10),
         ];
     }

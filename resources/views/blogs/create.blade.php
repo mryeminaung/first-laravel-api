@@ -7,18 +7,19 @@
 
     <div class="container">
         <div class="row">
-            <div class="mx-auto col-md-5">
+            <div class="mx-auto col-md-10 col-lg-6">
                 <h2 class="mt-3 text-center text-primary">Create New Blog</h2>
                 <div class="p-4 my-3 shadow-sm card">
                     <form autocomplete="off" method="POST" action="{{ route('blogs.store') }}">
                         @csrf
+                        @method('post')
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" value="{{ old('title') }}" name="title"
                                 class="form-control @error('title')
                                 is-invalid
                             @enderror"
-                                required id="title">
+                                id="title">
                             <x-error name="title" />
                         </div>
                         <div class="mb-3">
@@ -27,7 +28,7 @@
                                 class="form-control @error('slug')
                                 is-invalid
                             @enderror"
-                                required value="{{ old('slug') }}" id="slug">
+                                value="{{ old('slug') }}" id="slug">
                             <x-error name="slug" />
                         </div>
                         <div class="mb-3">
@@ -36,24 +37,24 @@
                                 class="form-control @error('intro')
                                 is-invalid
                             @enderror"
-                                required value="{{ old('intro') }}" id="intro">
+                                value="{{ old('intro') }}" id="intro">
                             <x-error name="intro" />
                         </div>
                         <div class="mb-3">
                             <label for="body" class="form-label">Body</label>
-                            <textarea
+                            <textarea rows="7"
                                 class="form-control @error('body')
                                 is-invalid
                             @enderror"
-                                required name="body" id="body"></textarea>
+                                name="body" id="body">{{ old('body') }}</textarea>
                             <x-error name="body" />
                         </div>
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Choose Category</label>
                             <select class="form-select" id="category_id" name="category_id">
                                 @foreach ($categories as $category)
-                                    <option {{ old('category_id') === $category->name ? 'selected' : '' }}
-                                        value="{{ $category->name }}">
+                                    <option {{ $category->id == old('category_id') ? 'selected' : '' }}
+                                        value="{{ $category->id }}">
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -62,11 +63,7 @@
                         <button type="submit" class="btn btn-primary">
                             Upload
                         </button>
-                        {{-- <ul class="list-group">
-                            @foreach ($errors->all() as $error)
-                                <li class="list-group-item text-danger">{{ $error }}</li>
-                            @endforeach
-                        </ul> --}}
+
                     </form>
                 </div>
             </div>

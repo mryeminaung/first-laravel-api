@@ -4,7 +4,7 @@
     </x-slot>
     <div class="container">
         <div class="row">
-            <div class="mx-auto col-md-5">
+            <div class="mx-auto col-md-8 col-lg-5">
                 <h2 class="mt-3 text-center text-primary">Register Form</h2>
                 <div class="p-4 my-3 shadow-sm card">
                     <form autocomplete="off" method="POST" action="{{ url('/register') }}">
@@ -28,10 +28,12 @@
                             <x-error name="username" />
                         </div>
                         <div class="mb-3">
-                            <label for="role" class="form-label">Choose Role</label>
-                            <select class="form-select" id="role" name="role">
-                                <option {{ old('role') === 'guest' ? 'selected' : '' }} value="guest">Guest</option>
-                                <option {{ old('role') === 'admin' ? 'selected' : '' }} value="admin">Admin</option>
+                            <label for="is_admin" class="form-label">Choose Role</label>
+                            <select class="form-select" id="is_admin" name="is_admin">
+                                <option {{ old('is_admin') == false ? 'selected' : '' }} value="0">Guest
+                                </option>
+                                <option {{ old('is_admin') == true ? 'selected' : '' }} value="1">Admin
+                                </option>
                             </select>
                         </div>
                         <div class="mb-3">

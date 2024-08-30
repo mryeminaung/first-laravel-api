@@ -18,7 +18,7 @@ class AuthSessionController extends Controller
 
         // check email first and then check password
         if (auth()->attempt($formData)) {
-            return to_route('blog.index')->with('success', 'Welcome Back');
+            return to_route('blogs.index')->with('success', 'Welcome Back');
         } else {
             return back()->withErrors(['email' => 'Email went wrong!', 'password' => 'Somethig went wrong!']);
         }
@@ -27,6 +27,6 @@ class AuthSessionController extends Controller
     public function logout()
     {
         auth()->logout();
-        return to_route('blog.index')->with('success', 'Good bye');
+        return to_route('blogs.index')->with('success', 'Good bye');
     }
 }
