@@ -16,13 +16,14 @@ class BlogController extends Controller
      */
     public function index()
     {
-        // dd(request(['search', 'category']));
-
         Session::put('preUrl', request()->fullUrl());
 
         // Blog::latest() query will be injected into the scope filter method
         return view('blogs.index', [
-            'blogs' => Blog::latest()->filter(request(['search', 'category']))->with('category', 'author')->paginate(6),
+            'blogs' => Blog::latest()->filter(request(['search', 'category']))
+                ->with('category', 'author')
+                ->paginate(6)
+                ->withQueryString(),
             'categories' => Category::all()
         ]);
     }
@@ -55,7 +56,9 @@ class BlogController extends Controller
     {
         return view('blogs.show', [
             'blog' => $blog->load('author', 'category'),
-            'randomBlogs' => Blog::inRandomOrder()->take(3)->with('author', 'category')->get()
+            'randomBlogs' => Blog::inRandomOrder()
+                ->take(3)
+                ->with('author', 'category')->get()
         ]);
     }
 

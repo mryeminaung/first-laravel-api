@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="tags ms-3">
-                <a class="text-decoration-none" href="/?category={{ $blog->category->slug }}">
+                <a class="text-decoration-none" href="/blogs/?category={{ $blog->category->slug }}">
                     <span class="badge bg-primary">{{ $blog->category->name }}</span>
                 </a>
             </div>

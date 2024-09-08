@@ -25,17 +25,34 @@ class Blog extends Model
     public function scopeFilter($query, $filter)
     {
         // here $query is the query that's Blog::latest();
-        $query->when($filter['slug'] ?? null, function ($query, $search) {
+        $query->when($filter['search'] ?? false, function ($query, $search) {
             $query->where('title', 'LIKE', '%' . $search . '%')
                 ->orWhere('body', 'LIKE', '%' . $search . '%');
         });
 
-        $query->when($filter['category'] ?? null, function ($query, $slug) {
+        $query->when($filter['category'] ?? false, function ($query, $slug) {
             $query->whereHas('category', function ($query) use ($slug) {
                 $query->where('slug', $slug);
             });
-            // $query->join('categories', 'blogs.category_id', '=', 'categories.id');
         });
+    }
+
+    public function category()
+    {
+        // type of relationship models
+        // hasOne, hasMany, belongsTo, belongsToMany
+
+        return $this->belongsTo(Category::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'blog_id');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function setSlugAttribute($value)
@@ -56,23 +73,5 @@ class Blog extends Model
     public function subscribers()
     {
         return $this->belongsToMany(User::class, 'blog_user', 'blog_id', 'user_id');
-    }
-
-    public function category()
-    {
-        // type of relationship models
-        // hasOne, hasMany, belongsTo, belongsToMany
-
-        return $this->belongsTo(Category::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'blog_id');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'user_id');
     }
 }
