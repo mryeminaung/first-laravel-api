@@ -18,7 +18,7 @@
     <x-hero />
 
     <!-- blogs section -->
-    <x-blogs-section :blogs="$blogs" :categories="$categories" :currentCategory="$currentCategory ?? null" />
+    <x-blogs-section :blogs="$blogs" />
 
     <!-- subscribe new blogs -->
     {{-- <x-subscribe /> --}}

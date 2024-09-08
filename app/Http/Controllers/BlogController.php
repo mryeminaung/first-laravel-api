@@ -24,7 +24,6 @@ class BlogController extends Controller
                 ->with('category', 'author')
                 ->paginate(6)
                 ->withQueryString(),
-            'categories' => Category::all()
         ]);
     }
 
