@@ -20,7 +20,7 @@ class BlogController extends Controller
 
         // Blog::latest() query will be injected into the scope filter method
         return view('blogs.index', [
-            'blogs' => Blog::latest()->filter(request(['search', 'category']))
+            'blogs' => Blog::latest()->filter(request(['search', 'category', 'username']))
                 ->with('category', 'author')
                 ->paginate(6)
                 ->withQueryString(),

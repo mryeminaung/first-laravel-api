@@ -7,7 +7,7 @@
         </div>
         <div class="ms-3">
             <h6>
-                <a class="text-decoration-none text-black" href="/user/{{ $comment->author->username }}">
+                <a class="text-decoration-none text-black" href="/blogs/?username={{ $comment->author->username }}">
                     {{ $comment->author->name }}
                 </a>
             </h6>

@@ -29,11 +29,9 @@ Route::get('/', function () {
     return to_route('blogs.index');
 });
 
-Route::resource('blogs', BlogController::class)->except(['show', 'create', 'store']);
+Route::resource('blogs', BlogController::class)->except(['create', 'show', 'store']);
 
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blogs.show');
-
-Route::get('/user/{user:username}', [UserController::class, 'show'])->name('user.blogs');
 
 // comment system
 Route::post("/blogs/{blog}/comments", [CommentController::class, 'store'])->name('comments.store');
@@ -49,13 +47,13 @@ Route::group(['controller' => BlogController::class, 'middleware' => 'admin'], f
     Route::post('/admin/blogs/store', 'store')->name('blogs.store');
 });
 
-Route::controller(RegisteredUserController::class)->group(function () {
-    Route::get('/register', 'create')->middleware('guest')->name('register.create');
-    Route::post('/register', 'store')->middleware('guest')->name('register.store');
+Route::group(['controller' => RegisteredUserController::class, 'middleware' => 'guest'], function () {
+    Route::get('/register', 'create')->name('register.create');
+    Route::post('/register', 'store')->name('register.store');
 });
 
 Route::controller(AuthSessionController::class)->group(function () {
-    Route::post('/logout', 'logout')->middleware('auth');
+    Route::post('/logout', 'logout')->middleware('auth')->name('logout');
     Route::get('/login', 'create')->middleware('guest')->name('login.create');
     Route::post('/login', 'store')->middleware('guest')->name('login.store');
 });
