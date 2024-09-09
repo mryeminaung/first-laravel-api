@@ -8,9 +8,13 @@
             {{ request('category') ?? 'Filter by Category' }}
         </button>
         <ul class="dropdown-menu">
+            <li>
+                <a href="/blogs" class="dropdown-item">All</a>
+            </li>
             @foreach ($categories as $category)
                 <li>
-                    <a class="dropdown-item" href="/blogs/?category={{ $category->slug }}">
+                    <a class="dropdown-item"
+                        href="/blogs/?category={{ $category->slug }}{{ request('username') ? '&username=' . request('username') : null }}{{ request('search') ? '&search=' . request('search') : null }}">
                         {{ $category->name }}
                     </a>
                 </li>

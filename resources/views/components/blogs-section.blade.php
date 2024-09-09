@@ -8,11 +8,24 @@
 
     <form action="" method="GET" class="my-3" autocomplete="false">
         <div class="mb-3 input-group">
+
+            {{-- add other query string based on request keywords --}}
+
+            @if (request('category'))
+                <input type="hidden" name="category" value="{{ request('category') }}" />
+            @endif
+
+            @if (request('username'))
+                <input type="hidden" name="username" value="{{ request('username') }}" />
+            @endif
+
             <input type="text" name="search" value="{{ request('search') ?? '' }}" class="form-control"
                 placeholder="Search Blogs..." required />
+
             <button class="input-group-text bg-primary text-light" id="basic-addon2" type="submit">
                 Search
             </button>
+
         </div>
     </form>
 

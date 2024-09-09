@@ -5,7 +5,6 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SubscriptionController;
-use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostsController;

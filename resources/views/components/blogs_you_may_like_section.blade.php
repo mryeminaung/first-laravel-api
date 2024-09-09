@@ -20,7 +20,7 @@
                                     <div class="ms-3 d-flex align-items-start flex-column">
                                         <h6>
                                             <a class="text-black text-decoration-none"
-                                                href="/blogs/?username={{ $blog->author->username }}">
+                                                href="/blogs/?username={{ $blog->author->username }}{{ request('category') ? '&category=' . request('category') : null }}{{ request('search') ? '&search=' . request('search') : null }}">
                                                 {{ $blog->author->name }}
                                             </a>
                                         </h6>
