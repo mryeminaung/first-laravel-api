@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'avatar' => "https://i.pravatar.cc/150?u=" . rand(1, 100),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => bcrypt('password'),
             // static::$password ??= 
             'remember_token' => Str::random(10),
         ];
@@ -40,7 +40,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

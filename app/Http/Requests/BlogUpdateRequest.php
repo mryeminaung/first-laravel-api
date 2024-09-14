@@ -23,7 +23,7 @@ class BlogUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|min:10',
-            'slug' => 'required|unique:blogs,slug',
+            'slug' => 'required',
             'intro' => 'required|min:10',
             'body'  => 'required|min:10',
             'category_id' => 'required|exists:categories,id',

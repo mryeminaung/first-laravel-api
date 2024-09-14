@@ -6,7 +6,6 @@
             <a href="/blogs" class="nav-link">Home</a>
             <a href="/blogs#blogs" class="nav-link">Blogs</a>
             @auth
-                <a href="/role-checker" class="nav-link">CheckRole</a>
                 <a href="/blogs" class="nav-link">Welcome, {{ auth()->user()->name }}</a>
                 @if (auth()->user()->isAdmin())
                     <a href="/admin/blogs/create" class="nav-link">Create Blog</a>

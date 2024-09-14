@@ -32,7 +32,9 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blogs.create', ['categories' => Category::all()]);
+        return view('blogs.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -66,7 +68,10 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('blogs.edit', ['blog' => $blog]);
+        return view('blogs.edit', [
+            'blog' => $blog,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -75,6 +80,7 @@ class BlogController extends Controller
     public function update(BlogUpdateRequest $request, Blog $blog)
     {
         $attributes = $request->validate();
+        $attributes['user_id'] = auth()->user()->id;
 
         $blog->update($attributes);
 

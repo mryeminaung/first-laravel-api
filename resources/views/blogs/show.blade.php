@@ -1,9 +1,11 @@
 @props(['blog', 'randomBlogs'])
 
 <x-layout>
+    
     <x-slot name="title">
         {{ ucwords(implode(' ', explode('-', $blog->slug))) }}
     </x-slot>
+
     <!-- single blog detail section -->
     <div class="container">
         <div class="row">
@@ -16,6 +18,13 @@
                     <form action="{{ route('blogs.subscriptions', $blog) }}" method="POST">
                         @csrf
                         @auth
+                            @if (auth()->user()->isAuthorized($blog))
+                                <a class="btn btn-sm btn-warning" role="button"
+                                    href="{{ route('blogs.edit', $blog) }}">Edit</a>
+                                <button form="delete-blog" type="submit" class="btn btn-sm btn-danger">
+                                    Delete
+                                </button>
+                            @endif
                             @if (auth()->user()->isSubscribed($blog))
                                 <button class="rounded-pill btn btn-sm btn-danger">
                                     Unsubscribe
@@ -28,6 +37,10 @@
                                 @endunless
                             @endif
                         @endauth
+                    </form>
+                    <form class="d-none" id="delete-blog" action="{{ route('blogs.destroy', $blog) }}" method="post">
+                        @csrf
+                        @method('delete')
                     </form>
                 </div>
 

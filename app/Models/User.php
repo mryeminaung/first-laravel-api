@@ -65,6 +65,11 @@ class User extends Authenticatable
             auth()->user()->subscribedBlogs->contains($blog->id);
     }
 
+    public function isAuthorized($blog)
+    {
+        return auth()->user()->id == $blog->author->id;
+    }
+
     // accessor function
     public function getNameAttribute($value)
     {

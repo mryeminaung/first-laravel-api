@@ -22,6 +22,15 @@ class Blog extends Model
     // public $timestamps = false;
     // this will make timestamps for model : created_at and updated_at as NULL
 
+    public function scopeCategoryFilter($query, $search)
+    {
+        $query->when($search, function ($query, $search) {
+            $query->whereHas('category', function ($query) use ($search) {
+                $query->where('slug', $search);
+            });
+        });
+    }
+
     public function scopeFilter($query, $filter)
     {
         // here $query is the query that's Blog::latest();
