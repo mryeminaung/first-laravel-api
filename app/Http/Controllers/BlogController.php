@@ -79,12 +79,12 @@ class BlogController extends Controller
      */
     public function update(BlogUpdateRequest $request, Blog $blog)
     {
-        $attributes = $request->validate();
+        $attributes = $request->validated();
         $attributes['user_id'] = auth()->user()->id;
 
         $blog->update($attributes);
 
-        return to_route('blogs.index');
+        return to_route('blogs.show', ['blog' => $blog]);
     }
 
     /**
