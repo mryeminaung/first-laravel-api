@@ -26,6 +26,7 @@ class BlogStoreRequest extends FormRequest
             'slug' => 'required|unique:blogs,slug',
             'intro' => 'required',
             'body'  => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'category_id' => 'required|exists:categories,id',
         ];
     }

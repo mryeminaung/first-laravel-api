@@ -1,8 +1,10 @@
 @props(['blog'])
 
 <div class="rounded shadow card">
-    <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
-        class="card-img-top" alt="..." />
+    <img src="{{ $blog->thumbnail
+        ? asset("storage/$blog->thumbnail")
+        : 'https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg' }}"
+        class="card-img-top" style="width: 100%; height: 350px;" alt="..." />
     <div class="card-body">
         <h3 class="card-title text-truncate">{{ $blog->title }}</h3>
 

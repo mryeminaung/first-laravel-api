@@ -10,7 +10,8 @@
             <div class="mx-auto col-md-10 col-lg-6">
                 <h2 class="mt-3 text-center text-primary">Create New Blog</h2>
                 <div class="p-4 my-3 shadow-sm card">
-                    <form autocomplete="off" method="POST" action="{{ route('blogs.store') }}">
+                    <form autocomplete="off" method="POST" action="{{ route('blogs.store') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('post')
                         <div class="mb-3">
@@ -50,6 +51,10 @@
                             <x-error name="body" />
                         </div>
                         <div class="mb-3">
+                            <label for="thumbnail" class="form-label">Upload photo</label>
+                            <input class="form-control form-control-sm" id="thumbnail" name="thumbnail" type="file">
+                        </div>
+                        <div class="mb-3">
                             <label for="category_id" class="form-label">Choose Category</label>
                             <select class="form-select" id="category_id" name="category_id">
                                 @foreach ($categories as $category)
@@ -59,6 +64,7 @@
                                     </option>
                                 @endforeach
                             </select>
+                            <x-error name="category_id" />
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Upload

@@ -1,7 +1,7 @@
 @props(['blog', 'randomBlogs'])
 
 <x-layout>
-    
+
     <x-slot name="title">
         {{ ucwords(implode(' ', explode('-', $blog->slug))) }}
     </x-slot>
@@ -11,8 +11,12 @@
         <div class="row">
             <div class="pt-4 mx-auto col-md-12 col-lg-8">
                 <a class="btn btn-primary text-decoration-none" href="{{ session('preUrl') }}">Back</a>
-                <img src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
-                    class="card-img-top" alt="..." />
+                <div class="border my-3">
+                    <img src="{{ $blog->thumbnail
+                        ? asset("storage/$blog->thumbnail")
+                        : 'https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg' }}"
+                        class="card-img-top" alt="..." style="width: 100%; height: 400px;"/>
+                </div>
                 <div class="gap-4 d-flex align-items-center justify-content-between">
                     <h3 class="my-3">{{ $blog->title }}</h3>
                     <form action="{{ route('blogs.subscriptions', $blog) }}" method="POST">

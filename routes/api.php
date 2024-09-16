@@ -19,15 +19,3 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
-/* ------------------------------------------------------- */
-
-// Route::get('/posts', [PostsController::class, 'index']);
-
-// Route::get('/posts/{post:slug}', [PostsController::class, 'show']);
-
-// Route::post('/posts', [PostsController::class, 'store']);
-
-// Route::match(['put', 'patch'], '/posts/{post}', [PostsController::class, 'update']);
-
-// Route::delete('/posts/{post}', [PostsController::class, 'destroy']);

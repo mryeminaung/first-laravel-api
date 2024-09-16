@@ -14,7 +14,6 @@ Route::get('/', function () {
     return to_route('blogs.index');
 });
 
-
 /* comment system */
 
 Route::post("/blogs/{blog}/comments", [CommentController::class, 'store'])->name('comments.store');

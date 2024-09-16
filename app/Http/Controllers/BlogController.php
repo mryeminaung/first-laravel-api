@@ -43,7 +43,9 @@ class BlogController extends Controller
     public function store(BlogStoreRequest $request)
     {
         $attributes = $request->validated();
+
         $attributes['user_id'] = auth()->user()->id;
+        $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
 
         Blog::create($attributes);
 
