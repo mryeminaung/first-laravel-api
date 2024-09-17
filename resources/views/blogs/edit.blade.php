@@ -10,7 +10,8 @@
             <div class="mx-auto col-md-10 col-lg-6">
                 <h2 class="mt-3 text-center text-primary">Edit Blog Form</h2>
                 <div class="p-4 my-3 shadow-sm card">
-                    <form autocomplete="off" method="POST" action="{{ route('blogs.update', $blog) }}">
+                    <form autocomplete="off" method="POST" action="{{ route('blogs.update', $blog) }}"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         @method('patch')
@@ -50,6 +51,15 @@
                             @enderror"
                                 name="body" id="body">{{ old('body') ?? $blog->body }}</textarea>
                             <x-error name="body" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumbnail" class="form-label">Choose Category</label>
+                            <input type="file" value="{{ old('thumbnail') }}" name="thumbnail"
+                                class="form-control @error('thumbnail')
+                                is-invalid
+                            @enderror"
+                                id="thumbnail">
+                            <x-error name="thumbnail" />
                         </div>
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Choose Category</label>

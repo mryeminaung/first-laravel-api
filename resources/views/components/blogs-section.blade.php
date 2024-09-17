@@ -6,7 +6,7 @@
 
     <x-category-dropdown />
 
-    <form action="" method="GET" class="my-3" autocomplete="false">
+    <form action="" method="GET" autocomplete="false">
         <div class="mb-3 input-group">
 
             {{-- add other query string based on request keywords --}}

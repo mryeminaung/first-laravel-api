@@ -10,12 +10,23 @@ use Illuminate\View\Component;
 class CategoryDropdown extends Component
 {
     public $categories;
+    public $tag;
+
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
         $this->categories = Category::all();
+        $this->tag = $this->getTag();
+    }
+
+    public function getTag()
+    {
+        $category = request('category');
+        if ($category) {
+            return Category::where('slug', $category);
+        }
     }
 
     /**
@@ -26,7 +37,8 @@ class CategoryDropdown extends Component
         return view(
             'components.category-dropdown',
             [
-                'categories' => $this->categories
+                'categories' => $this->categories,
+                'tag' => $this->tag->name
             ]
         );
     }

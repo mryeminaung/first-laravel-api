@@ -14,60 +14,21 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" value="{{ old('title') }}" name="title"
-                                class="form-control @error('title')
-                                is-invalid
-                            @enderror"
-                                id="title">
-                            <x-error name="title" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="slug" class="form-label">Slug</label>
-                            <input type="text" name="slug"
-                                class="form-control @error('slug')
-                                is-invalid
-                            @enderror"
-                                value="{{ old('slug') }}" id="slug">
-                            <x-error name="slug" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="intro" class="form-label">Intro</label>
-                            <input type="text" name="intro"
-                                class="form-control @error('intro')
-                                is-invalid
-                            @enderror"
-                                value="{{ old('intro') }}" id="intro">
-                            <x-error name="intro" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Body</label>
-                            <textarea rows="7"
-                                class="form-control @error('body')
-                                is-invalid
-                            @enderror"
-                                name="body" id="body">{{ old('body') }}</textarea>
-                            <x-error name="body" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="thumbnail" class="form-label">Upload photo</label>
-                            <input class="form-control form-control-sm" id="thumbnail" name="thumbnail" type="file">
-                        </div>
-                        <div class="mb-3">
-                            <label for="category_id" class="form-label">Choose Category</label>
-                            <select class="form-select" id="category_id" name="category_id">
-                                @foreach ($categories as $category)
-                                    <option {{ $category->id == old('category_id') ? 'selected' : '' }}
-                                        value="{{ $category->id }}">
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-error name="category_id" />
-                        </div>
+
+                        <x-form.input name="title" />
+
+                        <x-form.input name="slug" />
+
+                        <x-form.input name="intro" />
+
+                        <x-form.textarea name="body" />
+
+                        <x-form.input type="file" name="thumbnail" />
+
+                        <x-form.select :categories="$categories" />
+
                         <button type="submit" class="btn btn-primary">
-                            Upload
+                            Uploade
                         </button>
 
                     </form>

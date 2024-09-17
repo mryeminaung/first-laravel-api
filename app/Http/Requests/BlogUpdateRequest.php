@@ -26,6 +26,7 @@ class BlogUpdateRequest extends FormRequest
             'slug' => 'required',
             'intro' => 'required|min:10',
             'body'  => 'required|min:10',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'category_id' => 'required|exists:categories,id',
         ];
     }

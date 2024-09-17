@@ -18,6 +18,8 @@ class BlogController extends Controller
     {
         Session::put('preUrl', request()->fullUrl());
 
+        dd(Category::where('slug', "like", request(['category'])));
+
         // Blog::latest() query will be injected into the scope filter method
         return view('blogs.index', [
             'blogs' => Blog::latest()->filter(request(['search', 'category', 'username']))
@@ -83,6 +85,10 @@ class BlogController extends Controller
     {
         $attributes = $request->validated();
         $attributes['user_id'] = auth()->user()->id;
+
+        if ($request->file('thumbnail')) {
+            $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+        }
 
         $blog->update($attributes);
 
