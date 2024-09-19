@@ -23,9 +23,12 @@ class CategoryDropdown extends Component
 
     public function getTag()
     {
-        $category = request('category');
-        if ($category) {
-            return Category::where('slug', $category);
+        if (request(['category'])) {
+            $category = Category::where('slug', request('category'))->first();
+
+            return $category->name;
+        } else {
+            return null;
         }
     }
 
@@ -38,7 +41,7 @@ class CategoryDropdown extends Component
             'components.category-dropdown',
             [
                 'categories' => $this->categories,
-                'tag' => $this->tag->name
+                'tag' => $this->tag
             ]
         );
     }

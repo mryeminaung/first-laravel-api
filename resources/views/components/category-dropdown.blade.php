@@ -6,7 +6,7 @@
     <div class="dropdown">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            {{ request('category') ? $tag : 'Filter by Category' }}
+            {{ $tag ? ucwords($tag) : 'Filter by Category' }}
         </button>
         <ul class="dropdown-menu">
             <li>
