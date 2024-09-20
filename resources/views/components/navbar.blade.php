@@ -6,10 +6,7 @@
             <a href="/blogs" class="nav-link">Home</a>
             <a href="/blogs#blogs" class="nav-link">Blogs</a>
             @auth
-                <a href="/blogs" class="nav-link">Welcome, {{ auth()->user()->name }}</a>
-                @if (auth()->user()->isAdmin())
-                    <a href="/admin/blogs/create" class="nav-link">Create Blog</a>
-                @endif
+                <a href="{{ route('admin.blogs') }}" class="nav-link">Welcome, {{ auth()->user()->name }}</a>
                 <form action="/logout" method="post">
                     @csrf
                     <button type="submit" class="btn btn-link text-decoration-none">Logout</button>

@@ -1,16 +1,17 @@
 @props(['categories'])
 
-<x-layout>
+<x-admin-layout>
+
     <x-slot name="title">
         Create Blog
     </x-slot>
 
     <div class="container">
         <div class="row">
-            <div class="mx-auto col-md-10 col-lg-6">
+            <div class="mx-auto col-md-10 col-lg-12">
                 <h2 class="mt-3 text-center text-primary">Create New Blog</h2>
                 <div class="p-4 my-3 shadow-sm card">
-                    <form autocomplete="off" method="POST" action="{{ route('blogs.store') }}"
+                    <form autocomplete="off" method="POST" action="{{ route('admin.blogs.store') }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('post')
@@ -36,4 +37,5 @@
             </div>
         </div>
     </div>
-</x-layout>
+
+</x-admin-layout>

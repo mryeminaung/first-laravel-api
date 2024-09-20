@@ -28,31 +28,6 @@ class BlogController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('blogs.create', [
-            'categories' => Category::all()
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(BlogStoreRequest $request)
-    {
-        $attributes = $request->validated();
-
-        $attributes['user_id'] = auth()->user()->id;
-        $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
-
-        Blog::create($attributes);
-
-        return to_route('blogs.index');
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Blog $blog)

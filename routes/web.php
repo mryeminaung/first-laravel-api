@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthSessionController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\BlogController;
@@ -36,9 +37,10 @@ Route::get('/blogs/{blog:slug}/edit', [BlogController::class, 'edit'])->name('bl
 /* admin routes */
 // use middleware to protect routes from un-authorized requests
 
-Route::group(['controller' => BlogController::class, 'middleware' => 'admin'], function () {
-    Route::get('/admin/blogs/create', 'create')->name('blogs.create');
-    Route::post('/admin/blogs/store', 'store')->name('blogs.store');
+Route::group(['controller' => AdminController::class, 'middleware' => 'admin'], function () {
+    Route::get('/admin/blogs', 'index')->name('admin.blogs');
+    Route::get('/admin/blogs/create', 'create')->name('admin.blogs.create');
+    Route::post('/admin/blogs/store', 'store')->name('admin.blogs.store');
 });
 
 /* register routes */
