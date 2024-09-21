@@ -15,20 +15,20 @@
                     <img src="{{ $blog->thumbnail
                         ? asset("storage/$blog->thumbnail")
                         : 'https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg' }}"
-                        class="card-img-top" alt="..." style="width: 100%; height: 400px;"/>
+                        class="card-img-top" alt="..." style="width: 100%; height: 400px;" />
                 </div>
                 <div class="gap-4 d-flex align-items-center justify-content-between">
                     <h3 class="my-3">{{ $blog->title }}</h3>
                     <form action="{{ route('blogs.subscriptions', $blog) }}" method="POST">
                         @csrf
                         @auth
-                            @if (auth()->user()->isAuthorized($blog))
+                            {{-- @if (auth()->user()->isAuthorized($blog))
                                 <a class="btn btn-sm btn-warning" role="button"
-                                    href="{{ route('blogs.edit', $blog) }}">Edit</a>
+                                    href="{{ route('admin.blogs.edit', $blog) }}">Edit</a>
                                 <button form="delete-blog" type="submit" class="btn btn-sm btn-danger">
                                     Delete
                                 </button>
-                            @endif
+                            @endif --}}
                             @if (auth()->user()->isSubscribed($blog))
                                 <button class="rounded-pill btn btn-sm btn-danger">
                                     Unsubscribe
@@ -42,7 +42,8 @@
                             @endif
                         @endauth
                     </form>
-                    <form class="d-none" id="delete-blog" action="{{ route('blogs.destroy', $blog) }}" method="post">
+                    <form class="d-none" id="delete-blog" action="{{ route('admin.blogs.destroy', $blog) }}"
+                        method="post">
                         @csrf
                         @method('delete')
                     </form>

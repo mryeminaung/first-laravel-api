@@ -28,8 +28,11 @@
 
                         <x-form.select :categories="$categories" />
 
+                        <a href="{{ route('admin.blogs') }}" class="btn btn-primary">
+                            Cancel
+                        </a>
                         <button type="submit" class="btn btn-primary">
-                            Uploade
+                            Upload
                         </button>
 
                     </form>

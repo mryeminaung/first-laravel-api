@@ -1,16 +1,16 @@
 @props(['categories', 'blog'])
 
-<x-layout>
+<x-admin-layout>
     <x-slot name="title">
         Edit Blog
     </x-slot>
 
     <div class="container">
         <div class="row">
-            <div class="mx-auto col-md-10 col-lg-6">
+            <div class="mx-auto col-md-10 col-lg-12">
                 <h2 class="mt-3 text-center text-primary">Edit Blog Form</h2>
                 <div class="p-4 my-3 shadow-sm card">
-                    <form autocomplete="off" method="POST" action="{{ route('blogs.update', $blog) }}"
+                    <form autocomplete="off" method="POST" action="{{ route('admin.blogs.update', $blog) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -73,7 +73,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <a href="{{ route('blogs.show', $blog) }}" class="btn btn-primary">
+                        <a href="{{ route('admin.blogs') }}" class="btn btn-primary">
                             Cancel
                         </a>
                         <button type="submit" class="btn btn-primary">
@@ -84,4 +84,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-admin-layout>

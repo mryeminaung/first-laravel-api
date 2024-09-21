@@ -1,6 +1,8 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/blogs">Creative Coder</a>
+        <a class="navbar-brand" href="/blogs">
+            <img src="/images/creative-coder.png" alt="" style="width: auto; height: 40px">
+        </a>
 
         <div class="d-flex">
             <a href="/blogs" class="nav-link">Home</a>

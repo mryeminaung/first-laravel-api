@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthSessionController extends Controller
@@ -18,7 +19,11 @@ class AuthSessionController extends Controller
 
         // check email first and then check password
         if (auth()->attempt($formData)) {
-            return to_route('blogs.index')->with('success', 'Welcome Back');
+            if (auth()->user()->is_admin) {
+                return to_route('admin.blogs')->with('success', 'Welcome Back');
+            } else {
+                return to_route('blogs.index')->with('success', 'Welcome Back');
+            }
         } else {
             return back()->withErrors(['email' => 'Email went wrong!', 'password' => 'Somethig went wrong!']);
         }

@@ -28,19 +28,20 @@ Route::post('/blogs/{blog}/subscriptions', [
 
 /* blog routes */
 
-Route::resource('blogs', BlogController::class)->except(['create', 'store', 'edit', 'show']);
+Route::resource('blogs', BlogController::class)->except(['create', 'store', 'edit', 'update', 'show', 'destroy']);
 
 Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blogs.show');
-
-Route::get('/blogs/{blog:slug}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
 
 /* admin routes */
 // use middleware to protect routes from un-authorized requests
 
-Route::group(['controller' => AdminController::class, 'middleware' => 'admin'], function () {
-    Route::get('/admin/blogs', 'index')->name('admin.blogs');
-    Route::get('/admin/blogs/create', 'create')->name('admin.blogs.create');
-    Route::post('/admin/blogs/store', 'store')->name('admin.blogs.store');
+Route::group(['controller' => AdminController::class, 'middleware' => 'admin', 'prefix' => "/admin"], function () {
+    Route::get('/blogs', 'index')->name('admin.blogs');
+    Route::get('/blogs/create', 'create')->name('admin.blogs.create');
+    Route::post('/blogs/store', 'store')->name('admin.blogs.store');
+    Route::get('/blogs/{blog:slug}/edit', 'edit')->name('admin.blogs.edit');
+    Route::match(['put', 'patch'], '/blogs/{blog:slug}/update', 'update')->name('admin.blogs.update');
+    Route::delete('/blogs/{blog:slug}', 'destroy')->name('admin.blogs.destroy');
 });
 
 /* register routes */
