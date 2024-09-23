@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
@@ -13,6 +14,13 @@ class BlogController extends Controller
     public function index()
     {
         Session::put('preUrl', request()->fullUrl());
+
+        /* 
+            $this->authorize('admin')
+            auth()->user()->can('admin')
+            Gate::allows('admin')
+            Gate::denies('admin')
+        */
 
         // Blog::latest() query will be injected into the scope filter method
         return view('blogs.index', [

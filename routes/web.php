@@ -35,7 +35,7 @@ Route::get('/blogs/{blog:slug}', [BlogController::class, 'show'])->name('blogs.s
 /* admin routes */
 // use middleware to protect routes from un-authorized requests
 
-Route::group(['controller' => AdminController::class, 'middleware' => 'admin', 'prefix' => "/admin"], function () {
+Route::group(['controller' => AdminController::class, 'middleware' => 'can:admin', 'prefix' => "/admin"], function () {
     Route::get('/blogs', 'index')->name('admin.blogs');
     Route::get('/blogs/create', 'create')->name('admin.blogs.create');
     Route::post('/blogs/store', 'store')->name('admin.blogs.store');

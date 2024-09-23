@@ -8,7 +8,18 @@
             <a href="/blogs" class="nav-link">Home</a>
             <a href="/blogs#blogs" class="nav-link">Blogs</a>
             @auth
-                <a href="{{ route('admin.blogs') }}" class="nav-link">Welcome, {{ auth()->user()->name }}</a>
+                {{-- check auth user has admin access or not --}}
+                @can('admin')
+                    <a href="{{ route('admin.blogs') }}" class="nav-link">
+                        Dashboard
+                    </a>
+                @endcan
+                {{-- @if (auth()->user()->can('admin'))
+                    <a href="{{ route('admin.blogs') }}" class="nav-link">
+                        Dashboard
+                    </a>
+                @endif --}}
+
                 <form action="/logout" method="post">
                     @csrf
                     <button type="submit" class="btn btn-link text-decoration-none">Logout</button>
