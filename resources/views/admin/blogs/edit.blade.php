@@ -60,6 +60,10 @@
                             @enderror"
                                 id="thumbnail">
                             <x-error name="thumbnail" />
+                            <div class="border rounded p-2 mt-2" style="width: fit-content;">
+                                <img src="{{ asset("storage/$blog->thumbnail") }}" alt="" width="200px"
+                                    height="100px">
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Choose Category</label>

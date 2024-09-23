@@ -56,6 +56,8 @@ class AdminController extends Controller
 
         if ($request->file('thumbnail')) {
             $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+        } else {
+            $attributes['thumbnail'] = $blog->thumbnail;
         }
 
         $blog->update($attributes);

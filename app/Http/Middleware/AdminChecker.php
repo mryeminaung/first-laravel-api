@@ -16,7 +16,7 @@ class AdminChecker
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!User::find(auth()->user()->id)->isAdmin()) {
+        if (!auth()->user() || !User::find(auth()->user()->id)->isAdmin()) {
             return to_route('blogs.index')->with('message', 'You don\'t have permission to create a new blog');
         }
 
