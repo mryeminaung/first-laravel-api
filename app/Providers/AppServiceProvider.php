@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
@@ -27,5 +28,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('admin', function (User $user) {
             return $user && $user->is_admin;
         });
+
+        // Gate::define('view-blog', function (User $user, Blog $blog) {
+            // return $user->id == $blog->user_id;
+            // return $user->is($blog->author);
+            // return $user->isNot($blog->author);
+        // });
     }
 }

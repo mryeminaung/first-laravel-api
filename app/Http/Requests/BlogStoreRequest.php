@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Blog;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class BlogStoreRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class BlogStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('store', Blog::class);
     }
 
     /**

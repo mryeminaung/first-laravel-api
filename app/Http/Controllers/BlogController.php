@@ -33,6 +33,8 @@ class BlogController extends Controller
 
     public function show(Blog $blog)
     {
+        // $this->authorize('view', $blog);
+
         return view('blogs.show', [
             'blog' => $blog->load('author', 'category'),
             'randomBlogs' => Blog::inRandomOrder()

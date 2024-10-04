@@ -36,6 +36,8 @@
             {{-- {{ $blog->intro }} --}}
             {{ Str::limit($blog->body, 100) }}
         </p>
-        <div class="text-center"><a href="/blogs/{{ $blog->slug }}" class="btn btn-primary">Read More</a></div>
+        {{-- @can('view-blog', $blog) --}}
+            <div class="text-center"><a href="/blogs/{{ $blog->slug }}" class="btn btn-primary">Read More</a></div>
+        {{-- @endcan --}}
     </div>
 </div>

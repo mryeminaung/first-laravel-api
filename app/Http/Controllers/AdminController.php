@@ -22,6 +22,8 @@ class AdminController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Blog::class);
+
         return view('admin.blogs.create', [
             'categories' => Category::all()
         ]);
@@ -43,6 +45,8 @@ class AdminController extends Controller
 
     public function edit(Blog $blog)
     {
+        $this->authorize('edit', $blog);
+
         return view('admin.blogs.edit', [
             'blog' => $blog,
             'categories' => Category::all()
@@ -67,6 +71,8 @@ class AdminController extends Controller
 
     public function destroy(Blog $blog)
     {
+        $this->authorize('delete', $blog);
+
         $blog->delete();
         return to_route('admin.blogs');
     }
